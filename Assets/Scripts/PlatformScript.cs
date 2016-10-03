@@ -9,6 +9,6 @@ public class PlatformScript : MonoBehaviour
     {
 
         if (coll.gameObject.name == "orfeo" && coll.gameObject.transform.position.y>transform.position.y)
-            coll.gameObject.GetComponent<Movement>().grounded = true; 
+            coll.gameObject.GetComponent<Movement>().Grounded(); 
     }
 }

@@ -9,7 +9,8 @@ public class Movement : MonoBehaviour
     Animator anim;
     public int handRange = 1;
     public bool pickedUp = false;
-    public bool grounded = true; 
+    public bool grounded = true;
+    public GameObject palo; 
 
     // Use this for initialization
     void Start()
@@ -76,10 +77,18 @@ public class Movement : MonoBehaviour
             grounded = false; 
             anim.SetTrigger("jump");
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpforce), ForceMode2D.Impulse);
+            palo.GetComponent<Collider2D>().enabled = true;
             if (pickedUp)
             {
                 GameObject.Find("euridice").GetComponent<EurydiceScript>().JumpWithMe();
             }
+            
         }
+    }
+
+    public void Grounded()
+    {
+        palo.GetComponent<Collider2D>().enabled = false;
+        grounded = true; 
     }
 }
