@@ -69,8 +69,21 @@ public class EurydiceScript : MonoBehaviour {
     {
         Color temp = GetComponent<SpriteRenderer>().color;
         temp.a *= (1 + time);
-        temp.a = Mathf.Clamp(temp.a, 0,1);  
-        GetComponent<SpriteRenderer>().color = temp; 
+        temp.a = Mathf.Clamp(temp.a, 0,1); 
+        GetComponent<SpriteRenderer>().color = temp;
+
+        //BUGGATOOOOOOOOOOOOOOOOOOOOOo
+        //if (GetComponent<SpriteRenderer>().color.a <= 0.05f)
+        //{
+        //    Color t = GetComponent<SpriteRenderer>().color;
+        //    t.a = 1;
+        //    GetComponent<SpriteRenderer>().color = t; 
+        //    print("perbacco"); 
+        //    if(health==null)
+        //        health= GameObject.Find("Health").GetComponent<Health>();
+        //    health.Die();
+        //}
+       
     }
 
     public void JumpWithMe()
