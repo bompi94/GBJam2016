@@ -4,14 +4,17 @@ using System.Collections;
 public class EurydiceScript : MonoBehaviour {
     GameObject orfeo;
     public float speed;
-    public bool inStopZone;
     public bool following;
     public SpringJoint2D spring;
     bool seeing;
+    Animator anim;
+    Vector3 oldpos; 
 
     // Use this for initialization
     void Start () {
 	    orfeo = GameObject.Find("orfeo");
+        anim = GetComponent<Animator>();
+        oldpos = transform.position;  
     }
 	
 	// Update is called once per frame
@@ -24,10 +27,9 @@ public class EurydiceScript : MonoBehaviour {
         {
             transform.localScale = new Vector3(1, transform.localScale.y);
         }
-        if (!inStopZone && following)
+        if (following)
         {
             spring.connectedAnchor = orfeo.transform.position;
-            //viene verso di me
             if (orfeo.transform.localScale.x != transform.localScale.x)
             {
                 spring.enabled = false; 
@@ -38,6 +40,12 @@ public class EurydiceScript : MonoBehaviour {
                 if(Vector3.Distance(transform.position,orfeo.transform.position)>=spring.distance)
                 spring.enabled = true; 
             }
+
+            if (Vector3.Distance(transform.position, oldpos) <= 0.1f)
+                anim.SetBool("moving", false);
+            else
+                anim.SetBool("moving", true);
+            oldpos = transform.position; 
         }
 	}
 
@@ -45,18 +53,15 @@ public class EurydiceScript : MonoBehaviour {
     {
         following = true; 
         spring = GetComponent<SpringJoint2D>(); 
-        spring.enabled = true; 
+        spring.enabled = true;
+        anim.SetBool("following", true); 
     }
 
     public void LeaveHand()
     {
         following = false;
         spring.enabled = false;
-    }
-
-    public void Up(Vector3 pos)
-    {
-        transform.position = pos; 
+        anim.SetBool("following", false);
     }
 
     public void SeeYou(float time)

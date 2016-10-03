@@ -51,16 +51,17 @@ public class Movement : MonoBehaviour
         GameObject eurydice = GameObject.Find("euridice");
         if (!pickedUp)
         {
-
+            
             if (Vector3.Distance(transform.position, eurydice.transform.position) <= handRange)
             {
-                //change sprite 4 orfeo
+                anim.SetBool("hand", true);
                 eurydice.GetComponent<EurydiceScript>().GiveHand();
                 pickedUp = true;
             }
         }
         else
         {
+            anim.SetBool("hand", false);
             eurydice.GetComponent<EurydiceScript>().LeaveHand();
             pickedUp = false;
         }
