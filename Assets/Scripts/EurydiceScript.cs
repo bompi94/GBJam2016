@@ -10,12 +10,13 @@ public class EurydiceScript : MonoBehaviour {
     Animator anim;
     Vector3 oldpos;
     Health health; 
-
+	public float embarrassmentTimer=1f;
     // Use this for initialization
     void Start () {
 	    orfeo = GameObject.Find("orfeo");
         anim = GetComponent<Animator>();
         oldpos = transform.position;  
+		health= GameObject.Find("Health").GetComponent<Health>();
     }
 	
 	// Update is called once per frame
@@ -48,6 +49,7 @@ public class EurydiceScript : MonoBehaviour {
                 anim.SetBool("moving", true);
             oldpos = transform.position; 
         }
+
 	}
 
     public void GiveHand()
@@ -71,18 +73,18 @@ public class EurydiceScript : MonoBehaviour {
         temp.a *= (1 + time);
         temp.a = Mathf.Clamp(temp.a, 0,1); 
         GetComponent<SpriteRenderer>().color = temp;
-
+		embarrassmentTimer *= (1 + time);
+		embarrassmentTimer = Mathf.Clamp (embarrassmentTimer, 0f, 1f);
         //BUGGATOOOOOOOOOOOOOOOOOOOOOo
-        //if (GetComponent<SpriteRenderer>().color.a <= 0.05f)
-        //{
-        //    Color t = GetComponent<SpriteRenderer>().color;
-        //    t.a = 1;
-        //    GetComponent<SpriteRenderer>().color = t; 
-        //    print("perbacco"); 
-        //    if(health==null)
-        //        health= GameObject.Find("Health").GetComponent<Health>();
-        //    health.Die();
-        //}
+		if (embarrassmentTimer <= 0.05f)
+        {
+			Debug.Log ("Troppo Imbarazzata");
+            Color t = GetComponent<SpriteRenderer>().color;
+            t.a = 1;
+            GetComponent<SpriteRenderer>().color = t; 
+			embarrassmentTimer = 1f;
+            health.Die();
+        }
        
     }
 

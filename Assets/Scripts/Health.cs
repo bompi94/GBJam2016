@@ -62,6 +62,5 @@ public class Health : MonoBehaviour {
         Debug.Log("sei morto");
         lives--;
 		SceneManager.RespawnScene ();
-
     }
 }
