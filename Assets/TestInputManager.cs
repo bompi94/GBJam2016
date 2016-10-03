@@ -11,15 +11,15 @@ public class TestInputManager : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.G)) {
 			Debug.Log ("Next scene=" + transitions[i][0]);
-			scnMng.SceneChange (transitions[i][0]);
+			SceneManager.ChangeScene (transitions[i][0],false);
 			i = transitions [i] [0];
 		} else if (Input.GetKeyDown (KeyCode.H)) {
 			Debug.Log ("Next scene=" + transitions[i][1]);
-			scnMng.SceneChange (transitions[i][1]);
+			SceneManager.ChangeScene (transitions[i][1],false);
 			i = transitions [i] [1];
 		} else if (Input.GetKeyDown (KeyCode.B)) {
 			Debug.Log ("Next scene=" + transitions[i][2]);
-			scnMng.SceneChange (transitions[i][2]);
+			SceneManager.ChangeScene (transitions[i][2],true);
 			if (transitions [i] [2] != -1) {
 				i = transitions [i] [2];
 			} else {

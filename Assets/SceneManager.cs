@@ -7,34 +7,47 @@ public class SceneManager : MonoBehaviour {
 	public GameObject[] scenes;
 
 	public int currentScene=0;
-
+	public int lastScene=0;
 	public GameObject orfeo;
-	public GameObject eurice;
+	public GameObject euridice;
 	public Vector3 delta;
 	public float speed = 5;
 	public bool changing = false;
+	public static SceneManager scnMng;
 	// Use this for initialization
 	void Start () {
-		RepositionateCharacters ();
+		RepositionateCharacters (false);
+		scnMng = GameObject.Find ("SceneManager").GetComponent<SceneManager> ();
 	}
 
-
-	void RepositionateCharacters(){
-		Transform entrypoint = scenes [currentScene].GetComponentInChildren<EntryScript> ().transform;
+	void RepositionateCharacters(bool goingBack){
+		Transform entrypoint;
+		if (!goingBack) {
+			entrypoint = scenes [currentScene].GetComponentInChildren<EntryScript> ().transform;
+		} else {
+			TransitionPointScript point = Array.Find (scenes [currentScene].GetComponentsInChildren<TransitionPointScript> (), item => item.goToScene == lastScene);
+			point.DeactivateUntilExit ();
+			entrypoint = point.transform;
+		}
 		orfeo.transform.position = entrypoint.position;
-		eurice.transform.position = entrypoint.position + delta;
+		euridice.transform.position = entrypoint.position + delta;
 	}
 
-	public void SceneChange(int toScene){
+	public void SceneChange(int toScene,bool goingBack){
 		if (!changing && toScene>=0) {
 			changing = true;
+			lastScene = currentScene;
 			currentScene = toScene;
-			RepositionateCharacters ();
+			RepositionateCharacters (goingBack);
 			StartCoroutine (CameraSliding (currentScene, () => {
 				Debug.Log ("Transition Completed");
 				changing=false;
 			}));
 		}
+	}
+
+	public void ReinitScene(){
+		SceneChange (currentScene, false);
 	}
 
 	Vector3 GetCameraCenter(int sceneIndex){
@@ -50,5 +63,17 @@ public class SceneManager : MonoBehaviour {
 		}
 		Camera.main.transform.position = destination;
 		callback.Invoke ();
+	}
+
+	public static void ChangeScene(int scene,bool goingBack){
+		scnMng.SceneChange (scene, goingBack);
+	}
+
+	public static void RespawnScene(){
+		scnMng.ReinitScene ();
+	}
+
+	public static void UnityStronzo(){
+		Debug.Log ("Unity è uno stronzo");
 	}
 }

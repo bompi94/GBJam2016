@@ -61,8 +61,7 @@ public class Health : MonoBehaviour {
         Init();
         Debug.Log("sei morto");
         lives--;
-        SceneManager sm = GameObject.Find("SceneManager").GetComponent<SceneManager>();
-        sm.SceneChange(sm.currentScene);
-        
+		SceneManager.RespawnScene ();
+
     }
 }
