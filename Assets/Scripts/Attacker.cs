@@ -8,6 +8,7 @@ public class Attacker : MonoBehaviour
     public int range;
     Health health;
     bool beingHit;
+    public NoteSpawner noteSpawner; 
     // Use this for initialization
 
 
@@ -20,10 +21,12 @@ public class Attacker : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1"))
             {
+                noteSpawner.SpawnRandomNote();
                 targetEnemy.GetComponent<EnemyScript>().MatchSequence(0);
             }
             if (Input.GetButtonDown("Fire2"))
             {
+                noteSpawner.SpawnRandomNote();
                 targetEnemy.GetComponent<EnemyScript>().MatchSequence(1);
             }
         }
