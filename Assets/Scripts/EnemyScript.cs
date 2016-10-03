@@ -36,7 +36,6 @@ public class EnemyScript : MonoBehaviour {
     {
         if (match == sequence[tempcont])
         {
-            Debug.Log("Giusto"); 
             tempcont += 1;
             if (tempcont > cont+1)
             {
