@@ -15,6 +15,7 @@ public class Movement : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.Find("euridice").GetComponent<Collider2D>());
+
     }
 
     void Update()
@@ -71,5 +72,9 @@ public class Movement : MonoBehaviour
     {
         anim.SetTrigger("jump");
         GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpforce), ForceMode2D.Impulse);
+        if (pickedUp)
+        {
+            GameObject.Find("euridice").GetComponent<EurydiceScript>().JumpWithMe();
+        }
     }
 }

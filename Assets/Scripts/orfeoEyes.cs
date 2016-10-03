@@ -3,7 +3,6 @@ using System.Collections;
 
 public class orfeoEyes : MonoBehaviour {
     float timer = 0;
-    float eutimer = 0; 
 	// Use this for initialization
 	void Start () {
 	
@@ -18,7 +17,6 @@ public class orfeoEyes : MonoBehaviour {
             GameObject eurydice = GameObject.Find("euridice");
             Debug.DrawRay(transform.position, eurydice.transform.position - transform.position, Color.blue, 10000000);
             RaycastHit2D[] ray = Physics2D.RaycastAll(transform.position, eurydice.transform.position - transform.position);
-            eutimer = Time.deltaTime * 7;
             if (ray[0].collider.gameObject.name == "euridice")
             {
                 ray[0].collider.gameObject.GetComponent<EurydiceScript>().SeeYou(-0.20f); 

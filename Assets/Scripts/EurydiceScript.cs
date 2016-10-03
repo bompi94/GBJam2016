@@ -41,7 +41,7 @@ public class EurydiceScript : MonoBehaviour {
                 spring.enabled = true; 
             }
 
-            if (Vector3.Distance(transform.position, oldpos) <= 0.1f)
+            if (Vector3.Distance(transform.position, oldpos) <= 0.05f)
                 anim.SetBool("moving", false);
             else
                 anim.SetBool("moving", true);
@@ -70,5 +70,10 @@ public class EurydiceScript : MonoBehaviour {
         temp.a *= (1 + time);
         temp.a = Mathf.Clamp(temp.a, 0,1);  
         GetComponent<SpriteRenderer>().color = temp; 
+    }
+
+    public void JumpWithMe()
+    {
+        anim.SetTrigger("jump");
     }
 }
