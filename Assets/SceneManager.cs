@@ -17,11 +17,6 @@ public class SceneManager : MonoBehaviour {
 	void Start () {
 		RepositionateCharacters ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 
 	void RepositionateCharacters(){
@@ -30,10 +25,10 @@ public class SceneManager : MonoBehaviour {
 		eurice.transform.position = entrypoint.position + delta;
 	}
 
-	public void OnSceneChange(){
-		if (!changing) {
+	public void SceneChange(int toScene){
+		if (!changing && toScene>=0) {
 			changing = true;
-			currentScene++;
+			currentScene = toScene;
 			RepositionateCharacters ();
 			StartCoroutine (CameraSliding (currentScene, () => {
 				Debug.Log ("Transition Completed");
@@ -48,7 +43,6 @@ public class SceneManager : MonoBehaviour {
 
 	IEnumerator CameraSliding(int toSceneindex, Action callback){
 		Vector3 destination = GetCameraCenter (toSceneindex);
-		Debug.Log ("Going to " + destination);
 		while(Vector3.Distance(Camera.main.transform.position,destination)>0.1f){
 			//Camera.main.transform.position = Vector3.Lerp (Camera.main.transform.position, destination, Time.deltaTime * speed);
 			Camera.main.transform.position = Vector3.MoveTowards (Camera.main.transform.position, destination, Time.deltaTime * speed);
