@@ -89,7 +89,7 @@ public class EurydiceScript : MonoBehaviour {
             health = GameObject.Find("Health").GetComponent<Health>();
         health.euridicecantakedamage = false;
         int cont = 0;
-        while (cont < 5)
+        while (cont < 8)
         {
             cont++;
             Color c = GetComponent<SpriteRenderer>().color;

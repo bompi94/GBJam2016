@@ -73,7 +73,7 @@ public class Attacker : MonoBehaviour
             health = GameObject.Find("Health").GetComponent<Health>();
         health.orfeocantakedamage = false; 
         int cont = 0;
-        while (cont < 5)
+        while (cont < 8)
         {
             cont++;
             Color c = GetComponent<SpriteRenderer>().color;

@@ -20,8 +20,15 @@ public class Health : MonoBehaviour {
     {
         if(characterHit == "orfeo")
         {
-            
+            if(orfeocantakedamage)
+                health -= amount;
         }
-        health -= amount; 
+
+        if (characterHit == "euridice")
+        {
+            if (euridicecantakedamage)
+                health -= amount;
+        }
+
     }
 }
