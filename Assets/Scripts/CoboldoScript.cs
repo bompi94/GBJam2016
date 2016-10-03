@@ -5,7 +5,6 @@ public class CoboldoScript : MonoBehaviour {
 
 	public void OnTriggerEnter2D(Collider2D coll)
     {
-        
         if (!GetComponent<EnemyScript>().good)
         {
             if (coll.gameObject.name == "orfeo")
@@ -14,7 +13,6 @@ public class CoboldoScript : MonoBehaviour {
             }
             else if (coll.gameObject.name == "euridice")
                 GetComponent<EnemyScript>().DealDamage(2,"euridice");
-
         }
     }
 }

@@ -6,7 +6,8 @@ public class Attacker : MonoBehaviour
 
     public GameObject targetEnemy;
     public int range;
-    Health health; 
+    Health health;
+    bool beingHit;
     // Use this for initialization
 
 
@@ -61,11 +62,13 @@ public class Attacker : MonoBehaviour
 
     public void ShowHit()
     {
-        StartCoroutine(GotHit()); 
+        if(!beingHit)
+            StartCoroutine(GotHit()); 
     }
 
     IEnumerator GotHit()
     {
+        beingHit = true;
         if (health == null)
             health = GameObject.Find("Health").GetComponent<Health>();
         health.orfeocantakedamage = false; 
@@ -83,5 +86,6 @@ public class Attacker : MonoBehaviour
            
         }
         health.orfeocantakedamage = true;
+        beingHit = false; 
     }
 }
