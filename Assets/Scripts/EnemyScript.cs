@@ -10,11 +10,11 @@ public class EnemyScript : MonoBehaviour {
     public GameObject heart;
     public bool good = false;
 
-	// Use this for initialization
+    public int damages; 
+
 	void Start () { 
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 	}
 
@@ -63,5 +63,11 @@ public class EnemyScript : MonoBehaviour {
     {
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);
+    }
+
+    public void DealDamage(int multiplier,string characterHit)
+    {
+        GameObject.Find("Health").GetComponent<Health>().TakeDamage(damages*multiplier,characterHit);
+        GameObject.Find(characterHit).SendMessage("ShowHit"); 
     }
 }

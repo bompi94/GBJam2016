@@ -8,7 +8,8 @@ public class EurydiceScript : MonoBehaviour {
     public SpringJoint2D spring;
     bool seeing;
     Animator anim;
-    Vector3 oldpos; 
+    Vector3 oldpos;
+    Health health; 
 
     // Use this for initialization
     void Start () {
@@ -75,5 +76,31 @@ public class EurydiceScript : MonoBehaviour {
     public void JumpWithMe()
     {
         anim.SetTrigger("jump");
+    }
+
+    public void ShowHit()
+    {
+        StartCoroutine(GotHit());
+    }
+
+    IEnumerator GotHit()
+    {
+        if (health == null)
+            health = GameObject.Find("Health").GetComponent<Health>();
+        health.euridicecantakedamage = false;
+        int cont = 0;
+        while (cont < 5)
+        {
+            cont++;
+            Color c = GetComponent<SpriteRenderer>().color;
+            c.a = 0;
+            GetComponent<SpriteRenderer>().color = c;
+            yield return new WaitForSeconds(0.1f);
+            c.a = 1;
+            GetComponent<SpriteRenderer>().color = c;
+            yield return new WaitForSeconds(0.1f);
+
+        }
+        health.euridicecantakedamage = true;
     }
 }
