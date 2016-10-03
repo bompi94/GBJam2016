@@ -36,22 +36,25 @@ public class Attacker : MonoBehaviour
         if (targetEnemy == null || targetEnemy.GetComponent<EnemyScript>().good)
         {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            float minDist = Mathf.Infinity;
             foreach (GameObject enemy in enemies)
             {
-                if (Vector3.Distance(transform.position, enemy.transform.position) < range)
+                float tempdist = Vector3.Distance(transform.position, enemy.transform.position);
+                if (tempdist < range && tempdist<minDist )
                 {
+                    minDist = tempdist;
                     targetEnemy = enemy;
-                }
-                if (targetEnemy != null)
-                {
-                    targetEnemy.GetComponent<EnemyScript>().ShowSequence();
-                    break;
-                }
-                
+                }  
+            }
+            if (targetEnemy != null)
+            {
+                targetEnemy.GetComponent<EnemyScript>().ShowSequence();
             }
         }
+
         else
         {
+
             if (Vector3.Distance(transform.position, targetEnemy.transform.position) > range)
             {
                 targetEnemy.GetComponent<EnemyScript>().HideSequence();

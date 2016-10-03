@@ -9,6 +9,7 @@ public class Movement : MonoBehaviour
     Animator anim;
     public int handRange = 1;
     public bool pickedUp = false;
+    public bool grounded = true; 
 
     // Use this for initialization
     void Start()
@@ -70,11 +71,15 @@ public class Movement : MonoBehaviour
 
     public void Jump()
     {
-        anim.SetTrigger("jump");
-        GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpforce), ForceMode2D.Impulse);
-        if (pickedUp)
+        if (grounded)
         {
-            GameObject.Find("euridice").GetComponent<EurydiceScript>().JumpWithMe();
+            grounded = false; 
+            anim.SetTrigger("jump");
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpforce), ForceMode2D.Impulse);
+            if (pickedUp)
+            {
+                GameObject.Find("euridice").GetComponent<EurydiceScript>().JumpWithMe();
+            }
         }
     }
 }

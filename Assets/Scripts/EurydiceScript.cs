@@ -75,10 +75,8 @@ public class EurydiceScript : MonoBehaviour {
         GetComponent<SpriteRenderer>().color = temp;
 		embarrassmentTimer *= (1 + time);
 		embarrassmentTimer = Mathf.Clamp (embarrassmentTimer, 0f, 1f);
-        //BUGGATOOOOOOOOOOOOOOOOOOOOOo
 		if (embarrassmentTimer <= 0.05f)
         {
-			Debug.Log ("Troppo Imbarazzata");
             Color t = GetComponent<SpriteRenderer>().color;
             t.a = 1;
             GetComponent<SpriteRenderer>().color = t; 
