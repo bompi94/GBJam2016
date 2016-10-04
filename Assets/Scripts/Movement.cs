@@ -10,13 +10,14 @@ public class Movement : MonoBehaviour
     public int handRange = 1;
     public bool pickedUp = false;
     public bool grounded = true;
-    public GameObject palo; 
+    public GameObject palo;
 
     // Use this for initialization
     void Start()
     {
         anim = GetComponent<Animator>();
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.Find("euridice").GetComponent<Collider2D>());
+        if (GameObject.Find("euridice") != null)
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.Find("euridice").GetComponent<Collider2D>());
 
     }
 
@@ -45,7 +46,7 @@ public class Movement : MonoBehaviour
 
         transform.position += new Vector3(Input.GetAxis("Horizontal"), 0, 0) * Time.deltaTime * speed;
 
-       
+
 
     }
 
@@ -54,7 +55,7 @@ public class Movement : MonoBehaviour
         GameObject eurydice = GameObject.Find("euridice");
         if (!pickedUp)
         {
-            
+
             if (Vector3.Distance(transform.position, eurydice.transform.position) <= handRange)
             {
                 anim.SetBool("hand", true);
@@ -74,7 +75,7 @@ public class Movement : MonoBehaviour
     {
         if (grounded)
         {
-            grounded = false; 
+            grounded = false;
             anim.SetTrigger("jump");
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpforce), ForceMode2D.Impulse);
             palo.GetComponent<Collider2D>().enabled = true;
@@ -82,13 +83,13 @@ public class Movement : MonoBehaviour
             {
                 GameObject.Find("euridice").GetComponent<EurydiceScript>().JumpWithMe();
             }
-            
+
         }
     }
 
     public void Grounded()
     {
         palo.GetComponent<Collider2D>().enabled = false;
-        grounded = true; 
+        grounded = true;
     }
 }

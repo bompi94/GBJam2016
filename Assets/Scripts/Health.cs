@@ -21,9 +21,12 @@ public class Health : MonoBehaviour {
         health = maxHealth;
         healthSlider.maxValue = maxHealth;
         healthSlider.value = health;
-        Color c = GameObject.Find("euridice").GetComponent<SpriteRenderer>().color;
-        c.a = 1;
-        GameObject.Find("euridice").GetComponent<SpriteRenderer>().color = c; 
+        if (GameObject.Find("euridice") != null)
+        {
+            Color c = GameObject.Find("euridice").GetComponent<SpriteRenderer>().color;
+            c.a = 1;
+            GameObject.Find("euridice").GetComponent<SpriteRenderer>().color = c;
+        }
     }
 	
 	// Update is called once per frame
