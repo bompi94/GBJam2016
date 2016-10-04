@@ -47,6 +47,7 @@ public class CoboldoAI : MonoBehaviour
         {
             if (attacking)
             {
+                
                 AttackOrfeo();
             }
 
@@ -76,6 +77,7 @@ public class CoboldoAI : MonoBehaviour
 
         else if (Vector3.Distance(transform.position, orfeo.transform.position)<.2f && !steppingBack)
         {
+            targetPos = Vector3.zero;
             steppingBack = true;
             if(orfeo.transform.position.x<transform.position.x)
                 targetPos += transform.position + new Vector3(chargeDistance, 0, 0); 
