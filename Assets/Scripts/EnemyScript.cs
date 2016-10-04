@@ -3,7 +3,8 @@ using System.Collections;
 
 public class EnemyScript : MonoBehaviour {
 
-    public int[] sequence;
+    public int numberOfButtons;
+    int[] sequence;
     public int cont = 0;
     public int tempcont = 0;
     public GameObject buttonShower;
@@ -12,7 +13,12 @@ public class EnemyScript : MonoBehaviour {
 
     public int damages; 
 
-	void Start () { 
+	void Start () {
+        sequence = new int[numberOfButtons];
+        for(int i = 0; i<sequence.Length; i++)
+        {
+            sequence[i] = Random.Range(0, 2); 
+        }
 	}
 
 	void Update () {
