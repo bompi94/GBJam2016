@@ -39,14 +39,20 @@ public class Health : MonoBehaviour {
         
         if(characterHit == "orfeo")
         {
-            if(orfeocantakedamage)
+            if (orfeocantakedamage)
+            {
                 health -= amount;
+                GameObject.Find("orfeo").SendMessage("ShowHit");
+            }
         }
 
         if (characterHit == "euridice")
         {
             if (euridicecantakedamage)
+            {
                 health -= amount;
+                GameObject.Find("euridice").SendMessage("ShowHit");
+            }
         }
 
         if (health < 0)

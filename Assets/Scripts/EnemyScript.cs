@@ -73,6 +73,6 @@ public class EnemyScript : MonoBehaviour {
     public void DealDamage(int multiplier,string characterHit)
     {
         GameObject.Find("Health").GetComponent<Health>().TakeDamage(damages*multiplier,characterHit);
-        GameObject.Find(characterHit).SendMessage("ShowHit"); 
+        
     }
 }
