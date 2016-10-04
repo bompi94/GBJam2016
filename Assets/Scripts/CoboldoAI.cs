@@ -7,9 +7,11 @@ public class CoboldoAI : MonoBehaviour
     public float sightRange;
     public bool attacking;
     public float speed;
+    public float chargeDistance; 
     GameObject orfeo;
     Vector3 startingPosition;
-    bool steppingBack;
+    public Vector3 targetPos; 
+    public bool steppingBack;
     Animator anim;
     public GameObject buttonShower;
 
@@ -50,6 +52,7 @@ public class CoboldoAI : MonoBehaviour
 
             else
             {
+                steppingBack = false; 
                 GoTo(startingPosition);
             }
         }
@@ -61,10 +64,30 @@ public class CoboldoAI : MonoBehaviour
     public void AttackOrfeo()
     {
         anim.SetBool("attacking", true);
-        
-       
-        GoTo(orfeo.transform.position);
-        
+        if (steppingBack)
+        {
+            GoTo(targetPos); 
+            if (Vector3.Distance(transform.position, targetPos) < .2f)
+            {
+                steppingBack = false;
+                targetPos = Vector3.zero;
+            }
+        }
+
+        else if (Vector3.Distance(transform.position, orfeo.transform.position)<.2f && !steppingBack)
+        {
+            steppingBack = true;
+            if(orfeo.transform.position.x<transform.position.x)
+                targetPos += transform.position + new Vector3(chargeDistance, 0, 0); 
+            else
+                targetPos -= transform.position + new Vector3(chargeDistance, 0, 0);
+            GoTo(targetPos);
+        }
+
+        else if(!steppingBack)
+        {
+            GoTo(orfeo.transform.position);
+        } 
     }
 
     public void GoTo(Vector3 position)
