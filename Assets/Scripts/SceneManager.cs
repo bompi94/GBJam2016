@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class SceneManager : MonoBehaviour {
 
 	public GameObject[] scenes;
 
+	public Dictionary<int,GameObject> scenesInstatiated = new Dictionary<int,GameObject> ();
 	public int currentScene=0;
 	public int lastScene=0;
 	public GameObject orfeo;
@@ -14,8 +17,11 @@ public class SceneManager : MonoBehaviour {
 	public float speed = 5;
 	public bool changing = false;
 	public static SceneManager scnMng;
+
+	public GameObject currentsceneobj;
 	// Use this for initialization
 	void Start () {
+		InstantiateAndDestroy (0);
 		RepositionateCharacters (false);
 		scnMng = GameObject.Find ("SceneManager").GetComponent<SceneManager> ();
 	}
@@ -35,6 +41,7 @@ public class SceneManager : MonoBehaviour {
 
 	public void SceneChange(int toScene,bool goingBack){
 		if (!changing && toScene>=0) {
+			InstantiateAndDestroy (toScene);
 			changing = true;
 			lastScene = currentScene;
 			currentScene = toScene;
@@ -46,6 +53,43 @@ public class SceneManager : MonoBehaviour {
 		}
 	}
 
+	public void InstantiateAndDestroy(int scene){
+		//dalla scena corrente controlla se sono instanziate le scene necessarie e se c'è bisogno di distruggere qualcosa
+		if (currentsceneobj != null) {
+			Destroy (currentsceneobj);
+		}
+		currentsceneobj = Instantiate(scenes [scene]);		
+	}
+	/*
+	public void InstantiateAndDestroy(int scene){
+		Debug.Log ("Find something to Instantiate/Destroy, Going to "+scene);
+		//dalla scena corrente controlla se sono instanziate le scene necessarie e se c'è bisogno di distruggere qualcosa
+		if (!scenesInstatiated.ContainsKey (scene)) {
+			scenesInstatiated.Add (scene, Instantiate (scenes [scene]));
+			Debug.Log ("Instantiating scene " + scene);
+		}
+		GameObject sceneObj=scenesInstatiated[scene];
+		TransitionPointScript[] portals = sceneObj.GetComponentsInChildren<TransitionPointScript> ();
+		if (portals != null) {
+			int[] transitions=Array.ConvertAll<TransitionPointScript,int> (portals, (item) => {
+				return item.goToScene;
+			});
+			foreach (int transition in transitions) {
+				if (!scenesInstatiated.ContainsKey (transition)) {
+					Debug.Log ("Instantiating scene " + transition);
+					scenesInstatiated.Add (transition, Instantiate (scenes [transition]));
+				}
+			}
+			foreach(int key in scenesInstatiated.Keys){
+				if(!transitions.Contains(key) && key!=scene){
+					Debug.Log ("Destroing scene " + key);
+					Destroy (scenesInstatiated [key]);
+					scenesInstatiated.Remove (key);
+				}
+			}
+		}
+	}
+*/
 	public void ReinitScene(){
 		SceneChange (currentScene, false);
 	}
