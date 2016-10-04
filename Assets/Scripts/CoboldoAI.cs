@@ -51,11 +51,11 @@ public class CoboldoAI : MonoBehaviour
                 AttackOrfeo();
             }
 
-            else
-            {
-                steppingBack = false; 
-                GoTo(startingPosition);
-            }
+            //else
+            //{
+            //    steppingBack = false; 
+            //    GoTo(startingPosition);
+            //}
         }
 
         else
