@@ -25,4 +25,14 @@ public class ShowSlave : MonoBehaviour {
     {
         GetComponent<SpriteRenderer>().sprite = null; 
     }
+
+    public void Highlight()
+    {
+        GetComponent<SpriteRenderer>().color = Color.red; 
+    }
+
+    public void DeHighLight()
+    {
+        GetComponent<SpriteRenderer>().color = Color.white;
+    }
 }

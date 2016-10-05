@@ -40,8 +40,7 @@ public class CoboldoAI : MonoBehaviour
         }
         if (Vector3.Distance(transform.position, orfeo.transform.position) <= sightRange 
             && 
-            Physics2D.Raycast(eyes.transform.position, orfeo.transform.position - eyes.transform.position, sightRange)
-            .collider.gameObject.name == "orfeo")
+            CanSeeHim())
             attacking = true;
         else
         {
@@ -66,6 +65,22 @@ public class CoboldoAI : MonoBehaviour
 
         else
             anim.SetBool("attacking", false);
+    }
+
+    bool CanSeeHim()
+    {
+
+        RaycastHit2D[] rays =  Physics2D.RaycastAll(eyes.transform.position, orfeo.transform.position - eyes.transform.position, 100);
+
+        foreach(RaycastHit2D r in rays)
+        {
+            if (r.collider.gameObject.name == "orfeo")
+                return true;
+            if (r.collider.gameObject.name.StartsWith("plat"))
+                return false; 
+        }
+
+        return false; 
     }
 
     public void AttackOrfeo()
