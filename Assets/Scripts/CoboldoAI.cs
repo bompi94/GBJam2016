@@ -51,11 +51,11 @@ public class CoboldoAI : MonoBehaviour
                 AttackOrfeo();
             }
 
-            //else
-            //{
-            //    steppingBack = false; 
+            else
+            {
+                steppingBack = false; 
             //    GoTo(startingPosition);
-            //}
+            }
         }
 
         else
@@ -67,6 +67,7 @@ public class CoboldoAI : MonoBehaviour
         anim.SetBool("attacking", true);
         if (steppingBack)
         {
+            print("A");
             GoTo(targetPos); 
             if (Vector3.Distance(transform.position, targetPos) < .2f)
             {
@@ -77,17 +78,19 @@ public class CoboldoAI : MonoBehaviour
 
         else if (Vector3.Distance(transform.position, orfeo.transform.position)<.2f && !steppingBack)
         {
+            print("B");
             targetPos = Vector3.zero;
             steppingBack = true;
             if(orfeo.transform.position.x<transform.position.x)
                 targetPos += transform.position + new Vector3(chargeDistance, 0, 0); 
             else
-                targetPos -= transform.position + new Vector3(chargeDistance, 0, 0);
+                targetPos += transform.position + new Vector3(-chargeDistance, 0, 0);
             GoTo(targetPos);
         }
 
         else if(!steppingBack)
         {
+            print("C");
             GoTo(orfeo.transform.position);
         } 
     }
