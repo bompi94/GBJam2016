@@ -8,11 +8,9 @@ public class NoteSpawner : MonoBehaviour {
     public GameObject[] positions;
     public AudioClip[] note1sounds;
     public AudioClip[] note2sounds;
-    ArrayList audioQueue = new ArrayList();
 
     // Use this for initialization
     void Start () {
-        StartCoroutine(AudioCoroutine()); 
 	}
 	
 	// Update is called once per frame
@@ -25,30 +23,18 @@ public class NoteSpawner : MonoBehaviour {
             SpawnRandomNote();
     }
 
-    IEnumerator AudioCoroutine()
-    {
-        while (true)
-        {
-            if(audioQueue.Count!=0)
-            {
-                GetComponent<AudioSource>().PlayOneShot((AudioClip)audioQueue[0]);
-                audioQueue.RemoveAt(0);
-            }
-
-            yield return new WaitForSeconds(0.001f);
-        }
-    }
+   
 
     public void SpawnNote1()
     {
         Instantiate(note1,positions[Random.Range(0,positions.Length)].transform.position,Quaternion.identity);
-        audioQueue.Add(note1sounds[Random.Range(0, note1sounds.Length )]);
+        GetComponent<AudioSource>().PlayOneShot(note1sounds[Random.Range(0, note1sounds.Length )]);
     }
 
     public void SpawnNote2()
     {
         Instantiate(note2, positions[Random.Range(0, positions.Length )].transform.position, Quaternion.identity);
-        audioQueue.Add( note2sounds[Random.Range(0, note2sounds.Length )]);
+        GetComponent<AudioSource>().PlayOneShot( note2sounds[Random.Range(0, note2sounds.Length )]);
     }
 
     public void SpawnRandomNote()

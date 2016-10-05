@@ -27,19 +27,13 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetButtonDown("Dup"))
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetAxisRaw("DpadY")>0)
             Jump();
 
-        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S) || Input.GetButtonDown("Ddown"))
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S) || Input.GetAxisRaw("DpadY") < 0)
             PickUpEurydice();
 
-		float h = Input.GetAxis ("Horizontal");
-
-        if (Input.GetButtonDown("Dright"))
-            h = 1;
-
-        if (Input.GetButtonDown("Dleft"))
-            h = -1;
+		float h = Input.GetAxis ("Horizontal") + Input.GetAxisRaw("DpadX");
 
         if (!canGoLeft) {
 			h = Mathf.Clamp (h,0f, 1f);
