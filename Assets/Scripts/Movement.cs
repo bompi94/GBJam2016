@@ -45,9 +45,7 @@ public class Movement : MonoBehaviour
         }
 
         transform.position += new Vector3(Input.GetAxis("Horizontal"), 0, 0) * Time.deltaTime * speed;
-
-
-
+       
     }
 
     public void PickUpEurydice()

@@ -30,4 +30,12 @@ public class ButtonShowEnemy : MonoBehaviour {
             g.GetComponent<ShowSlave>().HideButton(); 
         }
     }
+
+    public void DeHighlightButtons()
+    {
+        for (int i = 0; i < showSlaves.Length; i++)
+        {
+            showSlaves[i].GetComponent<ShowSlave>().DeHighLight();
+        }
+    }
 }

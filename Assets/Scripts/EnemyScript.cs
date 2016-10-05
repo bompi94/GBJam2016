@@ -32,6 +32,8 @@ public class EnemyScript : MonoBehaviour {
         if (!good)
         {
             int[] numbers = { sequence[cont], sequence[cont + 1] };
+            DeHighlightButton(0);
+            DeHighlightButton(1);
             buttonShower.GetComponent<ButtonShowEnemy>().ShowButtons(numbers);
         }
     }
@@ -41,21 +43,45 @@ public class EnemyScript : MonoBehaviour {
         buttonShower.GetComponent<ButtonShowEnemy>().HideButtons();
     }
 
+    void HighlightButton(int index)
+    {
+        buttonShower.GetComponent<ButtonShowEnemy>().showSlaves[index % 2].GetComponent<ShowSlave>().Highlight(); 
+    }
+
+    void DeHighlightButton(int index)
+    {
+        buttonShower.GetComponent<ButtonShowEnemy>().showSlaves[index % 2].GetComponent<ShowSlave>().DeHighLight();
+    }
+
     public void MatchSequence(int match)
     {
 		if (!good) {			
 			if (match == sequence [tempcont]) {
-				tempcont += 1;
+                HighlightButton(tempcont);
+                tempcont += 1; 
 				if (tempcont > cont + 1) {
-					cont += 2;
-					if (cont < sequence.Length)
-						ShowSequence ();
-					else {
-						GetGood ();
-					}
+                    StartCoroutine(DelayStuff()); 
 				}
 			}
+
+            else
+            {
+                tempcont = cont;
+                DeHighlightButton(tempcont);
+            }
 		}
+    }
+
+    IEnumerator DelayStuff()
+    {
+        yield return new WaitForSeconds(.1f); 
+        cont += 2;
+        if (cont < sequence.Length)
+            ShowSequence();
+        else
+        {
+            GetGood();
+        }
     }
 
     public void GetGood()
