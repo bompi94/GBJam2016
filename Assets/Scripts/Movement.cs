@@ -22,18 +22,17 @@ public class Movement : MonoBehaviour
         anim = GetComponent<Animator>();
         if (GameObject.Find("euridice") != null)
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.Find("euridice").GetComponent<Collider2D>());
-
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetAxisRaw("DpadY")>0)
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)/* || Input.GetAxisRaw("DpadY")>0*/)
             Jump();
 
-        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S) || Input.GetAxisRaw("DpadY") < 0)
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)/* || Input.GetAxisRaw("DpadY") < 0*/)
             PickUpEurydice();
 
-		float h = Input.GetAxis ("Horizontal") + Input.GetAxisRaw("DpadX");
+		float h = Input.GetAxis ("Horizontal")/* + Input.GetAxisRaw("DpadX")*/;
 
         if (!canGoLeft) {
 			h = Mathf.Clamp (h,0f, 1f);
@@ -57,9 +56,6 @@ public class Movement : MonoBehaviour
         }
 
         transform.position += new Vector3(h, 0, 0) * Time.deltaTime * speed;
-
-
-
     }
 
     public void PickUpEurydice()

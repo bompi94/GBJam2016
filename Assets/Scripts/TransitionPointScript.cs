@@ -8,15 +8,23 @@ public class TransitionPointScript : MonoBehaviour {
 
 	public bool playerExited = true;
 
+	LevelScript level;
+
+	void Start(){
+		level = GetComponentInParent<LevelScript> ();
+	}
+
 
 	void OnTriggerEnter2D(Collider2D coll){
-		if (coll.name == "orfeo" && coll.GetComponent<Movement> ().pickedUp && playerExited) {
-			//scnManager.SceneChange (goToScene,goingBack);
-			SceneManager.UnityStronzo ();
-			SceneManager.ChangeScene (goToScene,goingBack);
-		}
-		if (coll.name == "orfeo" && !coll.GetComponent<Movement> ().pickedUp && playerExited) {
-			Debug.Log ("Prendi Euridice coglione!");
+		if (coll.name == "orfeo") {
+			if (coll.GetComponent<Movement> ().pickedUp && playerExited) {
+				//scnManager.SceneChange (goToScene,goingBack);
+				SceneManager.UnityStronzo ();
+				SceneManager.ChangeScene (goToScene, goingBack);
+			}
+			if (!coll.GetComponent<Movement> ().pickedUp && playerExited) {
+				Debug.Log ("Prendi Euridice coglione!");
+			}
 		}
 	}
 
