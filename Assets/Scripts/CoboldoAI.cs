@@ -14,6 +14,7 @@ public class CoboldoAI : MonoBehaviour
     public bool steppingBack;
     Animator anim;
     public GameObject buttonShower;
+    public GameObject eyes; 
 
     void Start()
     {
@@ -25,6 +26,8 @@ public class CoboldoAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
+
         if (orfeo.transform.position.x > transform.position.x)
         {
             transform.localScale = new Vector3(-1, 1, 0);
@@ -35,7 +38,10 @@ public class CoboldoAI : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 0);
             buttonShower.transform.localScale = new Vector3(1, 1, 0);
         }
-        if (Vector3.Distance(transform.position, orfeo.transform.position) <= sightRange)
+        if (Vector3.Distance(transform.position, orfeo.transform.position) <= sightRange 
+            && 
+            Physics2D.Raycast(eyes.transform.position, orfeo.transform.position - eyes.transform.position, sightRange)
+            .collider.gameObject.name == "orfeo")
             attacking = true;
         else
         {
