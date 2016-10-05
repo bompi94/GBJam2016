@@ -30,12 +30,12 @@ public class NoteSpawner : MonoBehaviour {
         while (true)
         {
             if(audioQueue.Count!=0)
-            {          
-                AudioSource.PlayClipAtPoint((AudioClip)audioQueue[0], Camera.main.transform.position);
+            {
+                GetComponent<AudioSource>().PlayOneShot((AudioClip)audioQueue[0]);
                 audioQueue.RemoveAt(0);
             }
 
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.001f);
         }
     }
 

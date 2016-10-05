@@ -29,9 +29,7 @@ public class Attacker : MonoBehaviour
                 noteSpawner.SpawnRandomNote();
                 targetEnemy.GetComponent<EnemyScript>().MatchSequence(1);
             }
-        }
-
-        
+        }  
     }
 
     public void FindNearestEnemy()
@@ -57,7 +55,6 @@ public class Attacker : MonoBehaviour
 
         else
         {
-
             if (Vector3.Distance(transform.position, targetEnemy.transform.position) > range)
             {
                 targetEnemy.GetComponent<EnemyScript>().HideSequence();
