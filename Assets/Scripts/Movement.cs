@@ -15,6 +15,7 @@ public class Movement : MonoBehaviour
 
 	public bool canGoLeft = true;
 	public bool canGoRight = true;
+    float oldDpadY; 
 
     // Use this for initialization
     void Start()
@@ -22,18 +23,24 @@ public class Movement : MonoBehaviour
         anim = GetComponent<Animator>();
         if (GameObject.Find("euridice") != null)
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.Find("euridice").GetComponent<Collider2D>());
-
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetAxisRaw("DpadY")>0)
+
+        float DpadY = Input.GetAxisRaw("DpadY");
+        
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || (DpadY!=oldDpadY && DpadY>0) )
             Jump();
 
-        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S) || Input.GetAxisRaw("DpadY") < 0)
+  
+
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S) || (DpadY != oldDpadY && DpadY < 0))
             PickUpEurydice();
 
-		float h = Input.GetAxis ("Horizontal") + Input.GetAxisRaw("DpadX");
+    
+
+        float h = Input.GetAxis ("Horizontal") + Input.GetAxis("DpadX");
 
         if (!canGoLeft) {
 			h = Mathf.Clamp (h,0f, 1f);
@@ -59,11 +66,12 @@ public class Movement : MonoBehaviour
         transform.position += new Vector3(h, 0, 0) * Time.deltaTime * speed;
 
 
-
+        oldDpadY = DpadY; 
     }
 
     public void PickUpEurydice()
     {
+        
         GameObject eurydice = GameObject.Find("euridice");
         if (!pickedUp)
         {
@@ -85,6 +93,7 @@ public class Movement : MonoBehaviour
 
     public void Jump()
     {
+         
         if (grounded)
         {
             grounded = false;
@@ -98,6 +107,7 @@ public class Movement : MonoBehaviour
             GetComponent<AudioSource>().clip = jumpSounds[Random.Range(0,jumpSounds.Length)];
             GetComponent<AudioSource>().Play();
         }
+
     }
 
     public void Grounded()
