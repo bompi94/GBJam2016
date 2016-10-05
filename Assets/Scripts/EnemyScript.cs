@@ -63,7 +63,8 @@ public class EnemyScript : MonoBehaviour {
         HideSequence();
         heart.SetActive(true);
         good = true;
-		currentLevel.EnemyDied (gameObject);
+        if(currentLevel!=null)
+		    currentLevel.EnemyDied (gameObject);
         StartCoroutine(GoAway());
     }
 
