@@ -41,14 +41,14 @@ public class NoteSpawner : MonoBehaviour {
 
     public void SpawnNote1()
     {
-        Instantiate(note1,positions[Random.Range(0,positions.Length-1)].transform.position,Quaternion.identity);
-        audioQueue.Add(note1sounds[Random.Range(0, note1sounds.Length - 1)]);
+        Instantiate(note1,positions[Random.Range(0,positions.Length)].transform.position,Quaternion.identity);
+        audioQueue.Add(note1sounds[Random.Range(0, note1sounds.Length )]);
     }
 
     public void SpawnNote2()
     {
-        Instantiate(note2, positions[Random.Range(0, positions.Length - 1)].transform.position, Quaternion.identity);
-        audioQueue.Add( note2sounds[Random.Range(0, note2sounds.Length - 1)]);
+        Instantiate(note2, positions[Random.Range(0, positions.Length )].transform.position, Quaternion.identity);
+        audioQueue.Add( note2sounds[Random.Range(0, note2sounds.Length )]);
     }
 
     public void SpawnRandomNote()

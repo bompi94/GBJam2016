@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Movement : MonoBehaviour
 {
-
+    public AudioClip[] jumpSounds; 
     public int speed;
     public int jumpforce;
     Animator anim;
@@ -95,7 +95,8 @@ public class Movement : MonoBehaviour
             {
                 GameObject.Find("euridice").GetComponent<EurydiceScript>().JumpWithMe();
             }
-
+            GetComponent<AudioSource>().clip = jumpSounds[Random.Range(0,jumpSounds.Length)];
+            GetComponent<AudioSource>().Play();
         }
     }
 

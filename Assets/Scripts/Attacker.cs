@@ -61,6 +61,7 @@ public class Attacker : MonoBehaviour
             if (Vector3.Distance(transform.position, targetEnemy.transform.position) > range)
             {
                 targetEnemy.GetComponent<EnemyScript>().HideSequence();
+                targetEnemy.GetComponent<EnemyScript>().tempcont = targetEnemy.GetComponent<EnemyScript>().cont;
                 targetEnemy = null;
             }
         }
