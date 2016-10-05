@@ -28,8 +28,7 @@ public class LevelScript : MonoBehaviour {
 			bool[] livingEnemies=state.levelState[levelIndex];
 			for (int i = 0; i < livingEnemies.Length; i++) {
 				if (!livingEnemies [i]) {
-					Debug.Log ("killing enemy");
-					Debug.Log ("name :" + enemies [i]);
+					Debug.Log ("killing enemy " + enemies [i]);
 					enemies [i].SetActive (false);
 				}
 			}
@@ -37,7 +36,7 @@ public class LevelScript : MonoBehaviour {
 	}
 
 	public void EnemyDied(GameObject enemy){
-		Debug.Log ("enemy ad index " + Array.IndexOf (enemies, enemy) + "died");
+		Debug.Log ("enemy ad index " + Array.IndexOf (enemies, enemy) + " died");
 		state.levelState [levelIndex] [Array.IndexOf (enemies, enemy)] = false;
 	}
 }
