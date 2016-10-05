@@ -13,7 +13,10 @@ public class EnemyScript : MonoBehaviour {
 
     public int damages; 
 
+	public LevelScript currentLevel;
+
 	void Start () {
+		currentLevel = gameObject.GetComponentInParent<LevelScript> ();
         sequence = new int[numberOfButtons];
         for(int i = 0; i<sequence.Length; i++)
         {
@@ -40,20 +43,19 @@ public class EnemyScript : MonoBehaviour {
 
     public void MatchSequence(int match)
     {
-        if (match == sequence[tempcont])
-        {
-            tempcont += 1;
-            if (tempcont > cont+1)
-            {
-                cont += 2;
-                if(cont<sequence.Length)
-                    ShowSequence();
-                else
-                {
-                    GetGood();
-                }
-            }
-        }
+		if (!good) {			
+			if (match == sequence [tempcont]) {
+				tempcont += 1;
+				if (tempcont > cont + 1) {
+					cont += 2;
+					if (cont < sequence.Length)
+						ShowSequence ();
+					else {
+						GetGood ();
+					}
+				}
+			}
+		}
     }
 
     public void GetGood()
@@ -61,6 +63,7 @@ public class EnemyScript : MonoBehaviour {
         HideSequence();
         heart.SetActive(true);
         good = true;
+		currentLevel.EnemyDied (gameObject);
         StartCoroutine(GoAway());
     }
 
