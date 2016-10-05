@@ -6,13 +6,9 @@ public class GameState : MonoBehaviour {
 
 	public Dictionary<int,bool[]> levelState = new Dictionary<int,bool[]> ();
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	public List<string> keysOwned = new List<string> ();
+
+	public List<string> keysTaken = new List<string>();
+
+	public Dictionary<int,bool> doorsState = new Dictionary<int, bool> ();
 }

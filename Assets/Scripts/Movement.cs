@@ -11,6 +11,10 @@ public class Movement : MonoBehaviour
     public bool pickedUp = false;
     public bool grounded = true;
     public GameObject palo;
+	public float hvalue;
+
+	public bool canGoLeft = true;
+	public bool canGoRight = true;
 
     // Use this for initialization
     void Start()
@@ -29,12 +33,20 @@ public class Movement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
             PickUpEurydice();
 
-        if (Input.GetAxis("Horizontal") < 0)
+		float h = Input.GetAxis ("Horizontal");
+
+		if (!canGoLeft) {
+			h = Mathf.Clamp (h,0f, 1f);
+		} else if (!canGoRight) {
+			h = Mathf.Clamp (h,-1f, 0f);
+		}
+		hvalue = h;
+        if (h < 0)
         {
             anim.SetBool("walking", true);
             transform.localScale = new Vector3(-1, transform.localScale.y);
         }
-        else if (Input.GetAxis("Horizontal") > 0)
+        else if (h > 0)
         {
             anim.SetBool("walking", true);
             transform.localScale = new Vector3(1, transform.localScale.y);
@@ -44,8 +56,10 @@ public class Movement : MonoBehaviour
             anim.SetBool("walking", false);
         }
 
-        transform.position += new Vector3(Input.GetAxis("Horizontal"), 0, 0) * Time.deltaTime * speed;
-       
+        transform.position += new Vector3(h, 0, 0) * Time.deltaTime * speed;
+
+
+
     }
 
     public void PickUpEurydice()
