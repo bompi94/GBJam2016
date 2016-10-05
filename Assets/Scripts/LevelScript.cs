@@ -35,6 +35,11 @@ public class LevelScript : MonoBehaviour {
 				}
 			}
 		}
+		if(IsAllEnemyDied ()){
+			//se sono morti tutti, chiamo la funzione AllEnemyDied
+			Debug.Log("All Enemy of level "+levelIndex+" Died!");
+			AllEnemyDied();
+		}
 	}
 
 	public void EnemyDied(GameObject enemy){
