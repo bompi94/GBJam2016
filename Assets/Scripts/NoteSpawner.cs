@@ -8,8 +8,6 @@ public class NoteSpawner : MonoBehaviour {
     public GameObject[] positions;
     public AudioClip[] note1sounds;
     public AudioClip[] note2sounds;
-    public AudioSource audioSourcenote1;
-    public AudioSource audioSourcenote2;
     ArrayList audioQueue = new ArrayList();
 
     // Use this for initialization
@@ -31,12 +29,10 @@ public class NoteSpawner : MonoBehaviour {
     {
         while (true)
         {
-            if(audioQueue.Count!=0 && !audioSourcenote1.isPlaying)
-            {
-                audioSourcenote1.clip = (AudioClip) audioQueue[0];
+            if(audioQueue.Count!=0)
+            {          
+                AudioSource.PlayClipAtPoint((AudioClip)audioQueue[0], Camera.main.transform.position);
                 audioQueue.RemoveAt(0);
-
-                AudioSource.PlayClipAtPoint(audioSourcenote1.clip, Camera.main.transform.position); 
             }
 
             yield return new WaitForSeconds(0.01f);
