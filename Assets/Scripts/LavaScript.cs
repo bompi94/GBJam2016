@@ -15,9 +15,11 @@ public class LavaScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D coll)
     {
-        if(coll.gameObject.name == "orfeo" || coll.gameObject.name == "euridice")
+        if (coll.gameObject.name == "orfeo" || coll.gameObject.name == "euridice")
         {
-            GameObject.Find("Health").GetComponent<Health>().Die(); 
+            GameObject.Find("Health").GetComponent<Health>().Die();
         }
+        else
+            coll.gameObject.GetComponent<EnemyScript>().GetGood(); 
     }
 }

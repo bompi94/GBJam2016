@@ -68,8 +68,8 @@ public class Movement : MonoBehaviour
 				anim.SetBool ("walking", false);
 			}
 
-			transform.position += new Vector3 (h, 0, 0) * Time.deltaTime * speed;
-
+            transform.position += new Vector3 (h, 0, 0) * Time.deltaTime * speed;
+            //GetComponent<Rigidbody2D>().AddForce(new Vector3(h, 0, 0));
 
 			oldDpadY = DpadY; 
 		}

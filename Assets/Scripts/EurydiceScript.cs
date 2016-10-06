@@ -43,7 +43,7 @@ public class EurydiceScript : MonoBehaviour {
                 spring.enabled = true; 
             }
 
-            if (Vector3.Distance(transform.position, oldpos) <= 0.05f)
+            if (Vector3.Distance(transform.position, oldpos) <= 0.02f)
                 anim.SetBool("moving", false);
             else
                 anim.SetBool("moving", true);
