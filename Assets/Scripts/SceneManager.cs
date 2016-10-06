@@ -99,6 +99,23 @@ public class SceneManager : MonoBehaviour {
 		SceneChange (currentScene, false);
 	}
 
+    public void DeathRespawn()
+    {
+        delta = (euridice.transform.position - orfeo.transform.position).normalized / 2; 
+        RepositionateCharacters(false);
+
+        if (currentsceneobj.transform.position.x > orfeo.transform.position.x)
+        {
+            orfeo.transform.localScale = new Vector3(1,transform.localScale.y,0);
+            euridice.transform.localScale = new Vector3(1, transform.localScale.y, 0);
+        }
+        else
+        {
+            orfeo.transform.localScale = new Vector3(-1, transform.localScale.y, 0);
+            euridice.transform.localScale = new Vector3(-1, transform.localScale.y, 0);
+        }
+    }
+
 	Vector3 GetCameraCenter(int sceneIndex){
 		return scenes [sceneIndex].GetComponentInChildren<CameraCenterScript> ().transform.position;
 	}
@@ -119,7 +136,7 @@ public class SceneManager : MonoBehaviour {
 	}
 
 	public static void RespawnScene(){
-		scnMng.ReinitScene ();
+		scnMng.DeathRespawn ();
 	}
 
 	public static void UnityStronzo(){
