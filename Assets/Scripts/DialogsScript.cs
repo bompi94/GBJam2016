@@ -22,7 +22,7 @@ public class DialogsScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!dialogFinished) {
-			if (Input.GetKeyDown (KeyCode.A)) {
+			if (Input.GetMouseButtonDown (0)) {
 				ShowNextMessage ();
 			}
 		} else {
