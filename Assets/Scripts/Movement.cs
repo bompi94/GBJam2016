@@ -25,7 +25,12 @@ public class Movement : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         if (GameObject.Find("euridice") != null)
-            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.Find("euridice").GetComponent<Collider2D>());
+        {
+            Collider2D[] colls = GetComponents<Collider2D>(); 
+            foreach(Collider2D c in colls)
+                Physics2D.IgnoreCollision(c, GameObject.Find("euridice").GetComponent<Collider2D>());
+            
+        }
         localScalex = transform.localScale.x; 
 		gameState = GameObject.Find ("GameState").GetComponent<GameState> ();
     }
