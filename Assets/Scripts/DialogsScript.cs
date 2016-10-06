@@ -6,17 +6,26 @@ public class DialogsScript : MonoBehaviour {
 
 	public string[] dialogs;//nel formato indiceCharacter:messaggio
 
-	public int dialogIndex = -1;
+	int dialogIndex = -1;
 
-	public DialogGameObject[] charactersCanvas;
+	DialogGameObject[] charactersCanvas;
 
-	public bool dialogFinished=false;
+	bool dialogFinished=false;
+
+	public bool dialogsEnabled;
 
 	// Use this for initialization
 	void Start () {
-		charactersCanvas=GameObject.Find("Dialog").GetComponentsInChildren<DialogGameObject>();
-		Time.timeScale = 0;
-		ShowNextMessage ();
+		charactersCanvas = GameObject.Find ("Dialog").GetComponentsInChildren<DialogGameObject> ();
+		if (!dialogsEnabled) {
+			dialogFinished = true;
+			foreach (DialogGameObject canvas in charactersCanvas) {
+				canvas.gameObject.SetActive (false);
+			}
+		} else {
+			Time.timeScale = 0;
+			ShowNextMessage ();
+		}
 	}
 	
 	// Update is called once per frame
