@@ -123,7 +123,6 @@ public class SceneManager : MonoBehaviour {
 	IEnumerator CameraSliding(int toSceneindex, Action callback){
 		Vector3 destination = GetCameraCenter (toSceneindex);
 		while(Vector3.Distance(Camera.main.transform.position,destination)>0.1f){
-			//Camera.main.transform.position = Vector3.Lerp (Camera.main.transform.position, destination, Time.deltaTime * speed);
 			Camera.main.transform.position = Vector3.MoveTowards (Camera.main.transform.position, destination, Time.deltaTime * speed);
 			yield return new WaitForEndOfFrame ();
 		}
