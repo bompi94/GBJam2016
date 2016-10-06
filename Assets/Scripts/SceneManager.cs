@@ -30,6 +30,7 @@ public class SceneManager : MonoBehaviour {
         scnMng = GameObject.Find ("SceneManager").GetComponent<SceneManager> ();
 		gameState = GameObject.Find ("GameState").GetComponent<GameState> ();
 
+
 	}
 
 	void RepositionateCharacters(bool goingBack){

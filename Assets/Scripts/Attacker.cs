@@ -10,6 +10,7 @@ public class Attacker : MonoBehaviour
     bool beingHit;
     public NoteSpawner noteSpawner; 
     // Use this for initialization
+	public bool attacking=false;
 
 
     // Update is called once per frame
@@ -23,11 +24,13 @@ public class Attacker : MonoBehaviour
             {
                 noteSpawner.SpawnRandomNote();
                 targetEnemy.GetComponent<EnemyScript>().MatchSequence(0);
+				attacking = true;
             }
             if (Input.GetButtonDown("Fire2"))
             {
                 noteSpawner.SpawnRandomNote();
                 targetEnemy.GetComponent<EnemyScript>().MatchSequence(1);
+				attacking = true;
             }
         }  
     }
@@ -60,6 +63,7 @@ public class Attacker : MonoBehaviour
                 targetEnemy.GetComponent<EnemyScript>().HideSequence();
                 targetEnemy.GetComponent<EnemyScript>().tempcont = targetEnemy.GetComponent<EnemyScript>().cont;
                 targetEnemy = null;
+				attacking = false;
             }
         }
     }
