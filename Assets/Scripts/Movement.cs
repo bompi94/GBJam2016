@@ -18,6 +18,8 @@ public class Movement : MonoBehaviour
     float oldDpadY;
     float localScalex; 
 
+	GameState gameState;
+
     // Use this for initialization
     void Start()
     {
@@ -25,50 +27,47 @@ public class Movement : MonoBehaviour
         if (GameObject.Find("euridice") != null)
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.Find("euridice").GetComponent<Collider2D>());
         localScalex = transform.localScale.x; 
+		gameState = GameObject.Find ("GameState").GetComponent<GameState> ();
     }
 
     void Update()
     {
-
-        float DpadY = Input.GetAxisRaw("DpadY");
+		if (!gameState.inPause) {
+			float DpadY = Input.GetAxisRaw ("DpadY");
         
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || (DpadY!=oldDpadY && DpadY>0) )
-            Jump();
+			if (Input.GetKeyDown (KeyCode.UpArrow) || Input.GetKeyDown (KeyCode.W) || (DpadY != oldDpadY && DpadY > 0))
+				Jump ();
 
   
 
-        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S) || (DpadY != oldDpadY && DpadY < 0))
-            PickUpEurydice();
+			if (Input.GetKeyDown (KeyCode.DownArrow) || Input.GetKeyDown (KeyCode.S) || (DpadY != oldDpadY && DpadY < 0))
+				PickUpEurydice ();
 
     
 
-        float h = Input.GetAxis ("Horizontal") + Input.GetAxis("DpadX");
+			float h = Input.GetAxis ("Horizontal") + Input.GetAxis ("DpadX");
 
-        if (!canGoLeft) {
-			h = Mathf.Clamp (h,0f, 1f);
-		} else if (!canGoRight) {
-			h = Mathf.Clamp (h,-1f, 0f);
+			if (!canGoLeft) {
+				h = Mathf.Clamp (h, 0f, 1f);
+			} else if (!canGoRight) {
+				h = Mathf.Clamp (h, -1f, 0f);
+			}
+			hvalue = h;
+			if (h < 0) {
+				anim.SetBool ("walking", true);
+				transform.localScale = new Vector3 (-localScalex, transform.localScale.y);
+			} else if (h > 0) {
+				anim.SetBool ("walking", true);
+				transform.localScale = new Vector3 (localScalex, transform.localScale.y);
+			} else {
+				anim.SetBool ("walking", false);
+			}
+
+			transform.position += new Vector3 (h, 0, 0) * Time.deltaTime * speed;
+
+
+			oldDpadY = DpadY; 
 		}
-		hvalue = h;
-        if (h < 0)
-        {
-            anim.SetBool("walking", true);
-            transform.localScale = new Vector3(-localScalex, transform.localScale.y);
-        }
-        else if (h > 0)
-        {
-            anim.SetBool("walking", true);
-            transform.localScale = new Vector3(localScalex, transform.localScale.y);
-        }
-        else
-        {
-            anim.SetBool("walking", false);
-        }
-
-        transform.position += new Vector3(h, 0, 0) * Time.deltaTime * speed;
-
-
-        oldDpadY = DpadY; 
     }
 
     public void PickUpEurydice()
