@@ -20,12 +20,16 @@ public class SceneManager : MonoBehaviour {
     GameObject oldScene;
 
 	public GameObject currentsceneobj;
+
+	GameState gameState;
 	// Use this for initialization
 	void Start () {
 		InstantiateAndDestroy (currentScene);
 		RepositionateCharacters (false);
         Camera.main.transform.position = GetCameraCenter(currentScene);
         scnMng = GameObject.Find ("SceneManager").GetComponent<SceneManager> ();
+		gameState = GameObject.Find ("GameState").GetComponent<GameState> ();
+
 	}
 
 	void RepositionateCharacters(bool goingBack){
@@ -95,9 +99,6 @@ public class SceneManager : MonoBehaviour {
 		}
 	}
 */
-	public void ReinitScene(){
-		SceneChange (currentScene, false);
-	}
 
     public void DeathRespawn()
     {
@@ -138,7 +139,7 @@ public class SceneManager : MonoBehaviour {
 		scnMng.DeathRespawn ();
 	}
 
-	public static void UnityStronzo(){
-		Debug.Log ("Unity è uno stronzo");
+	public static void GoToLastCheckpoint(){
+		scnMng.SceneChange (scnMng.gameState.indexLastCheckpointVisited, false);
 	}
 }
