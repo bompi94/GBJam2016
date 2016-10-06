@@ -23,8 +23,8 @@ public class WargAI : MonoBehaviour {
 	public float jumpforce;
 	public bool grounded = true;
 	public GameObject palo;
-	public Rigidbody2D rigidbodyr;
 
+	public float jumpCooldown = 0;
 	void Start()
 	{
 		orfeo = GameObject.Find("orfeo");
@@ -42,6 +42,10 @@ public class WargAI : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
+
+		if (jumpCooldown > 0) {
+			jumpCooldown -= Time.deltaTime;
+		}
 
 		if (orfeo.transform.position.x > transform.position.x)
 		{
@@ -215,8 +219,10 @@ public class WargAI : MonoBehaviour {
 			dir = new Vector3(dir.x, 0, 0);
 			transform.position += dir.normalized * speed * Time.deltaTime;
 		}
-		if (position.y - transform.position.y > 0.5f) {
+		if (jumpCooldown<=0 && position.y - transform.position.y > 0.7f) {
 			Debug.Log ("Doggo jump");
+			jumpCooldown = Random.Range (0f, 1f) * 5;
+			Debug.Log ("Random =" + jumpCooldown);
 			Jump ();
 		}
 	}
