@@ -141,6 +141,10 @@ public class SceneManager : MonoBehaviour {
 	}
 
 	public static void GoToLastCheckpoint(){
+        GameObject.Find("GameState").GetComponent<GameState>().levelState.Clear();
+        GameObject.Find("GameOverPanel").GetComponent<GameOverPanel>().Activate();
+        scnMng.speed *= 10000; 
 		scnMng.SceneChange (scnMng.gameState.indexLastCheckpointVisited, false);
-	}
+        scnMng.speed /= 10000;
+    }
 }

@@ -9,11 +9,13 @@ public class Health : MonoBehaviour {
     public bool orfeocantakedamage = true;
     public bool euridicecantakedamage = true;
     public Slider healthSlider;
-    public int lives = 30; 
+    public int lives = 30;
+    int l;
 
 	// Use this for initialization
 	void Start () {
         Init();
+        l = lives;
     }
 
     void Init()
@@ -31,7 +33,7 @@ public class Health : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //GameObject.Find("LivesText").GetComponent<Text>().text = "x " + lives; 
+        GameObject.Find("LivesText").GetComponent<Text>().text = "x " + l; 
 	}
 
     public void TakeDamage(int amount,string characterHit)
@@ -69,9 +71,11 @@ public class Health : MonoBehaviour {
     {
         Init();
         Debug.Log("sei morto");
-        lives--;
-		if (lives <= 0) {
+        l--;
+		if (l <= 0) {
 			SceneManager.GoToLastCheckpoint ();
+            l = lives; 
+
 		} else {
 			SceneManager.RespawnScene ();
 		}
