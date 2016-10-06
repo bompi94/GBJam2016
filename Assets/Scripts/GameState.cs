@@ -12,10 +12,11 @@ public class GameState : MonoBehaviour {
 
 	public Dictionary<int,bool> doorsState = new Dictionary<int, bool> ();
 
-
 	public GameObject pausePanel;
 
 	public bool inPause=false;
+
+	public int indexLastCheckpointVisited = 0;
 
 	void Update(){
 		if (Input.GetKeyDown (KeyCode.Escape)) {

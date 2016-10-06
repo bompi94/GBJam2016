@@ -8,6 +8,7 @@ public class LevelScript : MonoBehaviour {
 	public GameObject[] enemies;
 	GameState state;
 	public TransitionPointScript[] portals;
+	public bool isCheckpoint;
 	// Use this for initialization
 	void Start () {
 		state=GameObject.Find ("GameState").GetComponent<GameState> ();
@@ -39,6 +40,9 @@ public class LevelScript : MonoBehaviour {
 			//se sono morti tutti, chiamo la funzione AllEnemyDied
 			Debug.Log("All Enemy of level "+levelIndex+" Died!");
 			AllEnemyDied();
+		}
+		if (isCheckpoint) {
+			state.indexLastCheckpointVisited = levelIndex;
 		}
 	}
 

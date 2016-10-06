@@ -70,6 +70,10 @@ public class Health : MonoBehaviour {
         Init();
         Debug.Log("sei morto");
         lives--;
-		SceneManager.RespawnScene ();
+		if (lives <= 0) {
+			SceneManager.GoToLastCheckpoint ();
+		} else {
+			SceneManager.RespawnScene ();
+		}
     }
 }
