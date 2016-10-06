@@ -15,7 +15,8 @@ public class Movement : MonoBehaviour
 
 	public bool canGoLeft = true;
 	public bool canGoRight = true;
-    float oldDpadY; 
+    float oldDpadY;
+    float localScalex; 
 
     // Use this for initialization
     void Start()
@@ -23,6 +24,7 @@ public class Movement : MonoBehaviour
         anim = GetComponent<Animator>();
         if (GameObject.Find("euridice") != null)
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), GameObject.Find("euridice").GetComponent<Collider2D>());
+        localScalex = transform.localScale.x; 
     }
 
     void Update()
@@ -51,12 +53,12 @@ public class Movement : MonoBehaviour
         if (h < 0)
         {
             anim.SetBool("walking", true);
-            transform.localScale = new Vector3(-1, transform.localScale.y);
+            transform.localScale = new Vector3(-localScalex, transform.localScale.y);
         }
         else if (h > 0)
         {
             anim.SetBool("walking", true);
-            transform.localScale = new Vector3(1, transform.localScale.y);
+            transform.localScale = new Vector3(localScalex, transform.localScale.y);
         }
         else
         {
