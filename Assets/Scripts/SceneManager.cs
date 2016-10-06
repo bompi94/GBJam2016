@@ -22,9 +22,10 @@ public class SceneManager : MonoBehaviour {
 	public GameObject currentsceneobj;
 	// Use this for initialization
 	void Start () {
-		InstantiateAndDestroy (0);
+		InstantiateAndDestroy (currentScene);
 		RepositionateCharacters (false);
-		scnMng = GameObject.Find ("SceneManager").GetComponent<SceneManager> ();
+        Camera.main.transform.position = GetCameraCenter(currentScene);
+        scnMng = GameObject.Find ("SceneManager").GetComponent<SceneManager> ();
 	}
 
 	void RepositionateCharacters(bool goingBack){
