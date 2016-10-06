@@ -17,6 +17,7 @@ public class SceneManager : MonoBehaviour {
 	public float speed = 5;
 	public bool changing = false;
 	public static SceneManager scnMng;
+    GameObject oldScene;
 
 	public GameObject currentsceneobj;
 	// Use this for initialization
@@ -45,9 +46,12 @@ public class SceneManager : MonoBehaviour {
 			changing = true;
 			lastScene = currentScene;
 			currentScene = toScene;
+            delta = euridice.transform.position - orfeo.transform.position;
+                
 			RepositionateCharacters (goingBack);
 			StartCoroutine (CameraSliding (currentScene, () => {
 				Debug.Log ("Transition Completed");
+                Destroy(oldScene);
 				changing=false;
 			}));
 		}
@@ -56,7 +60,7 @@ public class SceneManager : MonoBehaviour {
 	public void InstantiateAndDestroy(int scene){
 		//dalla scena corrente controlla se sono instanziate le scene necessarie e se c'è bisogno di distruggere qualcosa
 		if (currentsceneobj != null) {
-			Destroy (currentsceneobj);
+            oldScene = currentsceneobj;
 		}
 		currentsceneobj = Instantiate(scenes [scene]);		
 	}
