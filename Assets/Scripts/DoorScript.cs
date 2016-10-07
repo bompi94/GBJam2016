@@ -7,6 +7,7 @@ public class DoorScript : MonoBehaviour {
 	public int doorindex;
 	public string keyNameNeeded;
 	BoxCollider2D wallCollider;
+    public Sprite aperta; 
 	// Use this for initialization
 	void Start () {
 		gameState = GameObject.Find ("GameState").GetComponent<GameState> ();
@@ -34,8 +35,8 @@ public class DoorScript : MonoBehaviour {
 
 	void OpenDoor(){
 		Debug.Log ("Open Door");
-		wallCollider.enabled = false;
-		GetComponent<SpriteRenderer> ().enabled = false;
+        GetComponent<SpriteRenderer>().sprite = aperta;
+        wallCollider.enabled = false;
 		GetComponent<BoxCollider2D> ().enabled = false;
 		//enabled = false;
 	}
