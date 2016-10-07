@@ -33,7 +33,9 @@ public class Health : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        GameObject.Find("LivesText").GetComponent<Text>().text = "x " + l; 
+		GameObject livesText = GameObject.Find ("LivesText");
+		if(livesText!=null)
+			livesText.GetComponent<Text>().text = "x " + l; 
 	}
 
     public void TakeDamage(int amount,string characterHit)
