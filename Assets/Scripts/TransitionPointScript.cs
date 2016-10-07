@@ -7,7 +7,7 @@ public class TransitionPointScript : MonoBehaviour
     public int goToScene;
     public bool goingBack;
 
-    public bool playerExited = true;
+    bool playerExited = true;
     bool inside;
 
     LevelScript level;

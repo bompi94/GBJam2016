@@ -18,7 +18,7 @@ public class WallScript : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D coll){
-		if (coll.tag == "Player") {
+		if (coll.tag == "Player" && coll.gameObject.name == "orfeo") {
 			//if (eventualDoor != null && eventualDoor.enabled) {
 				if (fromLeft) {
 					coll.GetComponent<Movement> ().canGoRight = false;
