@@ -16,11 +16,17 @@ public class CoboldoAI : MonoBehaviour
     public GameObject buttonShower;
     public GameObject eyes; 
 
+	public float hForce;
+
+	//Rigidbody2D enemyRigidbody;
+
     void Start()
     {
         orfeo = GameObject.Find("orfeo");
         startingPosition = transform.position;
         anim = GetComponent<Animator>();
+	//	enemyRigidbody = GetComponent<Rigidbody2D> ();
+		Physics2D.IgnoreCollision (GetComponent<PolygonCollider2D> (), orfeo.GetComponent<BoxCollider2D> ());
     }
 
     // Update is called once per frame
@@ -90,11 +96,21 @@ public class CoboldoAI : MonoBehaviour
         {
             print("A");
             GoTo(targetPos); 
-            if (Vector3.Distance(transform.position, targetPos) < .2f)
+			Vector3 coboldoNoY = transform.position;
+			coboldoNoY.y = 0;
+			Vector3 targetNoY = targetPos;
+			targetNoY.y = 0;
+		/*	if (Vector3.Distance(coboldoNoY, targetNoY) < .2f)
             {
                 steppingBack = false;
                 targetPos = Vector3.zero;
             }
+*/
+			if (Mathf.Abs(transform.position.x - targetPos.x) < .2f)
+			{
+				steppingBack = false;
+				targetPos = Vector3.zero;
+			}
         }
 
         else if (Vector3.Distance(transform.position, orfeo.transform.position)<.2f && !steppingBack)
@@ -123,6 +139,10 @@ public class CoboldoAI : MonoBehaviour
         {
             dir = new Vector3(dir.x, 0, 0);
             transform.position += dir.normalized * speed * Time.deltaTime;
+		//	enemyRigidbody.AddForce (dir.normalized * hForce * Time.deltaTime, ForceMode2D.Impulse);
+			/*if (enemyRigidbody.velocity.magnitude > 0.5f) {
+				enemyRigidbody.velocity = new Vector2 (0.5f, -enemyRigidbody.gravityScale);
+			}*/
         }
     }
 }
