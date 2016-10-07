@@ -47,17 +47,6 @@ public class WargAI : MonoBehaviour {
 			jumpCooldown -= Time.deltaTime;
 		}
 
-		if (orfeo.transform.position.x > transform.position.x)
-		{
-			transform.localScale = new Vector3(1, 1, 0);
-			buttonShower.transform.localScale = new Vector3(1, 1, 0);
-		}
-		else
-		{
-			transform.localScale = new Vector3(-1, 1, 0);
-			buttonShower.transform.localScale = new Vector3(-1, 1, 0);
-		}
-
 		canseeOrfeo = CanSeeHim ();
 		canseeEuridice = CanSeeHer ();
 		if (euridiceHavePriority && !orfeo.GetComponent<Attacker>().attacking) {
@@ -85,8 +74,10 @@ public class WargAI : MonoBehaviour {
 		{
 			if (attackingOrfeo) {
 				AttackOrfeo ();
+				RotateEnemy (orfeo);
 			} else if (attackingEuridice) {
 				AttackEuridice ();
+				RotateEnemy (euridice);
 			}
 			else
 			{
@@ -97,6 +88,19 @@ public class WargAI : MonoBehaviour {
 
 		else
 			anim.SetBool("attacking", false);
+	}
+
+	void RotateEnemy(GameObject target){
+		if (target.transform.position.x > transform.position.x)
+		{
+			transform.localScale = new Vector3(1, 1, 0);
+			buttonShower.transform.localScale = new Vector3(1, 1, 0);
+		}
+		else
+		{
+			transform.localScale = new Vector3(-1, 1, 0);
+			buttonShower.transform.localScale = new Vector3(-1, 1, 0);
+		}
 	}
 
 	bool CanSeeHim()
@@ -220,9 +224,7 @@ public class WargAI : MonoBehaviour {
 			transform.position += dir.normalized * speed * Time.deltaTime;
 		}
 		if (jumpCooldown<=0 && position.y - transform.position.y > 0.7f) {
-			Debug.Log ("Doggo jump");
 			jumpCooldown = Random.Range (0f, 1f) * 5;
-			Debug.Log ("Random =" + jumpCooldown);
 			Jump ();
 		}
 	}
