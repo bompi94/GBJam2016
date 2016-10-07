@@ -16,6 +16,8 @@ public class WurmAI : MonoBehaviour {
 		orfeo = GameObject.Find("orfeo");
 		collider=GetComponent<BoxCollider2D> ();
 		collider.enabled = false;
+		GetComponent<EnemyScript> ().aimable = false;
+		GetComponent<EnemyScript> ().HideSequence ();
 	}
 	
 	// Update is called once per frame
@@ -33,6 +35,8 @@ public class WurmAI : MonoBehaviour {
 				disappearing = true;
 				GetComponent<WurmScript> ().Disappear ();
 				collider.enabled = false;
+				GetComponent<EnemyScript> ().aimable = false;
+				GetComponent<EnemyScript> ().HideSequence ();
 				Invoke ("HideWurm", 1f);
 			}
 			if (!appearing)
@@ -44,8 +48,14 @@ public class WurmAI : MonoBehaviour {
 		Debug.Log ("Called show");
 		appeared = true;
 		GetComponent<WurmScript> ().Appear ();
-		countdownToDisappear=Random.Range (2f, 5f);
+		countdownToDisappear=Random.Range (3.5f, 5.5f);
+		Invoke ("FinishAppearing", 0.5f);
+	}
+
+	void FinishAppearing(){
 		collider.enabled = true;
+		GetComponent<EnemyScript> ().aimable = true;
+		GetComponent<EnemyScript> ().ShowSequence ();
 	}
 
 	void HideWurm(){
@@ -54,6 +64,7 @@ public class WurmAI : MonoBehaviour {
 		appeared = false;
 		appearing = false;
 		disappearing = false;
+
 	}
 
 	void OnTriggerEnter2D(Collider2D coll)
