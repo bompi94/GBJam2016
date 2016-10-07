@@ -6,7 +6,7 @@ public class CoboldoAI : MonoBehaviour
 
     public float sightRange;
     public bool attacking;
-    public float speed;
+    float speed;
     public float chargeDistance; 
     GameObject orfeo;
     Vector3 startingPosition;
@@ -27,6 +27,7 @@ public class CoboldoAI : MonoBehaviour
         anim = GetComponent<Animator>();
 	//	enemyRigidbody = GetComponent<Rigidbody2D> ();
 		Physics2D.IgnoreCollision (GetComponent<PolygonCollider2D> (), orfeo.GetComponent<BoxCollider2D> ());
+        speed = .5f;
     }
 
     // Update is called once per frame
