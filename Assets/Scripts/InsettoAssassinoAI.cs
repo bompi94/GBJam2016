@@ -76,7 +76,7 @@ public class InsettoAssassinoAI : MonoBehaviour
     void GoUp()
     {
         Vector3 dir = (startingPos.transform.position - transform.position);
-        if (Vector3.Distance(transform.position, startingPos.transform.position) > .001f)
+        if (Vector3.Distance(transform.position, startingPos.transform.position) > .01f)
             transform.position += dir.normalized * Time.deltaTime * downSpeed;
         else
         {

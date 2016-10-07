@@ -10,7 +10,7 @@ public class EnemyScript : MonoBehaviour {
     public GameObject buttonShower;
     public GameObject heart;
     public bool good = false;
-
+	public bool aimable = true;
     public int damages; 
 
 	public LevelScript currentLevel;
@@ -29,7 +29,7 @@ public class EnemyScript : MonoBehaviour {
 
     public void ShowSequence()
     {
-        if (!good)
+		if (!good && aimable)
         {
             int[] numbers = { sequence[cont], sequence[cont + 1] };
             DeHighlightButton(0);

@@ -96,16 +96,6 @@ public class CoboldoAI : MonoBehaviour
         {
             print("A");
             GoTo(targetPos); 
-			Vector3 coboldoNoY = transform.position;
-			coboldoNoY.y = 0;
-			Vector3 targetNoY = targetPos;
-			targetNoY.y = 0;
-		/*	if (Vector3.Distance(coboldoNoY, targetNoY) < .2f)
-            {
-                steppingBack = false;
-                targetPos = Vector3.zero;
-            }
-*/
 			if (Mathf.Abs(transform.position.x - targetPos.x) < .2f)
 			{
 				steppingBack = false;
