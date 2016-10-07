@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InsettoAssassinoAI : MonoBehaviour {
+public class InsettoAssassinoAI : MonoBehaviour
+{
 
     public GameObject startingPos;
     public GameObject endingPos;
     float timer;
-    public float startToFallTime; 
+    public float startToFallTime;
     bool seen;
     bool goingDown;
     GameObject orfeo;
@@ -15,19 +16,22 @@ public class InsettoAssassinoAI : MonoBehaviour {
     float uptimer;
     public float downTime;
     LineRenderer lr;
-    public GameObject coda; 
+    public GameObject coda;
+    public bool shouldMove = true;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         orfeo = GameObject.Find("orfeo");
-        lr = GetComponent<LineRenderer>(); 
-        
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        lr = GetComponent<LineRenderer>();
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         lr.SetPosition(0, startingPos.transform.position);
-        lr.SetPosition(1, coda.transform.position); 
+        lr.SetPosition(1, coda.transform.position);
         timer += Time.deltaTime;
         if (!GetComponent<EnemyScript>().good)
         {
@@ -45,10 +49,11 @@ public class InsettoAssassinoAI : MonoBehaviour {
             }
             else
             {
-                startingPos.transform.position = new Vector3(orfeo.transform.position.x, startingPos.transform.position.y, 0);
+                if (shouldMove)
+                    startingPos.transform.position = new Vector3(orfeo.transform.position.x, startingPos.transform.position.y, 0);
             }
         }
-	}
+    }
 
 
     void GoDown()
@@ -56,7 +61,7 @@ public class InsettoAssassinoAI : MonoBehaviour {
         Vector3 dir = (endingPos.transform.position - transform.position);
         if (Vector3.Distance(transform.position, endingPos.transform.position) > .2f)
             transform.position += dir.normalized * Time.deltaTime * downSpeed;
-        else if(uptimer>=downTime)
+        else if (uptimer >= downTime)
         {
             uptimer = 0;
             arrived = true;
@@ -64,7 +69,7 @@ public class InsettoAssassinoAI : MonoBehaviour {
 
         else
         {
-            uptimer += Time.deltaTime; 
+            uptimer += Time.deltaTime;
         }
     }
 
@@ -77,7 +82,7 @@ public class InsettoAssassinoAI : MonoBehaviour {
         {
             timer = 0;
             goingDown = false;
-            arrived = false; 
+            arrived = false;
         }
     }
 

@@ -1,9 +1,30 @@
 fileFormatVersion: 2
 guid: 5d8b1b47ef8845345b449bb3a6681666
-timeCreated: 1475741897
+timeCreated: 1475794294
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: checkpoint (3fps)_0
+    21300002: checkpoint (3fps)_1
+    21300004: checkpoint (3fps)_2
+    21300006: checkpoint (3fps)_3
+    21300008: checkpoint (3fps)_4
+    21300010: checkpoint (3fps)_5
+    21300012: checkpoint (3fps)_6
+    21300014: checkpoint (3fps)_7
+    21300016: checkpoint (3fps)_8
+    21300018: checkpoint (3fps)_9
+    21300020: checkpoint (3fps)_10
+    21300022: checkpoint (3fps)_11
+    21300024: checkpoint (3fps)_12
+    21300026: checkpoint (3fps)_13
+    21300028: checkpoint (3fps)_14
+    21300030: checkpoint (3fps)_15
+    21300032: checkpoint (3fps)_16
+    21300034: checkpoint (3fps)_17
+    21300036: checkpoint (3fps)_18
+    21300038: checkpoint (3fps)_19
+    21300040: checkpoint (3fps)_20
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -38,7 +59,7 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -51,7 +72,46 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: checkpoint (3fps)_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 191
+        width: 128
+        height: 92
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
+      border: {x: 11, y: 0, z: 7, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: checkpoint (3fps)_1
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 47
+        width: 128
+        height: 89
+      alignment: 5
+      pivot: {x: 1, y: 0.5}
+      border: {x: 8, y: 0, z: 10, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: checkpoint (3fps)_2
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 169
+        width: 68
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 12, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
     outline: []
   spritePackingTag: 
   userData: 
