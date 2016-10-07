@@ -23,6 +23,7 @@ public class DoorScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 	
 	}
 
@@ -38,6 +39,9 @@ public class DoorScript : MonoBehaviour {
         GetComponent<SpriteRenderer>().sprite = aperta;
         wallCollider.enabled = false;
 		GetComponent<BoxCollider2D> ().enabled = false;
+		if (gameState.doorsState.ContainsKey (doorindex)) {
+			gameState.doorsState[doorindex] = true;
+		} 
 		//enabled = false;
 	}
 }
