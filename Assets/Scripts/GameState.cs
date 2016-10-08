@@ -19,7 +19,7 @@ public class GameState : MonoBehaviour {
 	public int indexLastCheckpointVisited = 0;
 
 	void Update(){
-		if (Input.GetKeyDown (KeyCode.Escape)) {
+		if (Input.GetKeyDown (KeyCode.Escape) || Input.GetButtonDown("pause")) {
 			if (inPause) {//sono in pausa
 				pausePanel.SetActive (false);
 				inPause = false;
