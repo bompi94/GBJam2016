@@ -15,9 +15,7 @@ public class WargAI : CoboldoAI {
 
     void Update()
     {
-
         Flip();
-
         if (Vector3.Distance(transform.position, orfeo.transform.position) <= sightRange
             &&
             CanSeeHim())
