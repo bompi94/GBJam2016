@@ -6,13 +6,13 @@ public class CoboldoAI : MonoBehaviour
 
     public float sightRange;
     public bool attacking;
-    float speed;
+    protected float speed;
     public float chargeDistance; 
-    GameObject orfeo;
-    Vector3 startingPosition;
+    protected GameObject orfeo;
+    protected Vector3 startingPosition;
     public Vector3 targetPos; 
     public bool steppingBack;
-    Animator anim;
+    protected Animator anim;
     public GameObject buttonShower;
     public GameObject eyes; 
 
@@ -33,18 +33,9 @@ public class CoboldoAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
 
-        if (orfeo.transform.position.x > transform.position.x)
-        {
-            transform.localScale = new Vector3(-1, 1, 0);
-            buttonShower.transform.localScale = new Vector3(-1, 1, 0);
-        }
-        else
-        {
-            transform.localScale = new Vector3(1, 1, 0);
-            buttonShower.transform.localScale = new Vector3(1, 1, 0);
-        }
+        Flip();
+       
         if (Vector3.Distance(transform.position, orfeo.transform.position) <= sightRange 
             && 
             CanSeeHim())
@@ -74,7 +65,21 @@ public class CoboldoAI : MonoBehaviour
             anim.SetBool("attacking", false);
     }
 
-    bool CanSeeHim()
+    protected void Flip()
+    {
+        if (orfeo.transform.position.x > transform.position.x)
+        {
+            transform.localScale = new Vector3(-1, 1, 0);
+            buttonShower.transform.localScale = new Vector3(-1, 1, 0);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1, 1, 0);
+            buttonShower.transform.localScale = new Vector3(1, 1, 0);
+        }
+    }
+
+    protected bool CanSeeHim()
     {
 
         RaycastHit2D[] rays =  Physics2D.RaycastAll(eyes.transform.position, orfeo.transform.position - eyes.transform.position, 100);
