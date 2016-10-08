@@ -10,8 +10,8 @@ public class PlatformScript : MonoBehaviour
             coll.gameObject.GetComponent<Movement>().Grounded(); 
 
 		if (coll.gameObject.name == "warg" && coll.gameObject.transform.position.y > transform.position.y) {
-			Debug.Log ("doggo ground");
-			coll.gameObject.GetComponent<WargAI> ().Grounded (); 
+			//Debug.Log ("doggo ground");
+			//coll.gameObject.GetComponent<WargAI> ().Grounded (); 
 		}
 		
     }
