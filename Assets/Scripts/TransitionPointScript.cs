@@ -9,6 +9,7 @@ public class TransitionPointScript : MonoBehaviour
     GameObject freccia;
     bool playerExited = true;
     bool inside;
+    public bool shouldShowFrecccia = true; 
 
     LevelScript level;
     GameObject orfeo; 
@@ -20,16 +21,19 @@ public class TransitionPointScript : MonoBehaviour
 
     void Update()
     {
-        if (GetComponent<Collider2D>().enabled && freccia == null)
+        if (shouldShowFrecccia)
         {
-            freccia = Instantiate(Resources.Load("freccia"),transform.position,Quaternion.identity) as GameObject;
-            if (transform.localPosition.x > 0)
-                freccia.transform.localScale = new Vector3(-.5f, .5f, transform.localScale.z);
-            freccia.transform.parent = transform; 
-        }
+            if (GetComponent<Collider2D>().enabled && freccia == null)
+            {
+                freccia = Instantiate(Resources.Load("freccia"), transform.position, Quaternion.identity) as GameObject;
+                if (transform.localPosition.x > 0)
+                    freccia.transform.localScale = new Vector3(-.5f, .5f, transform.localScale.z);
+                freccia.transform.parent = transform;
+            }
 
-        if (GetComponent<Collider2D>() == null && freccia != null)
-            Destroy(freccia);
+            if (GetComponent<Collider2D>() == null && freccia != null)
+                Destroy(freccia);
+        }
 
         if (orfeo != null && inside)
         {
