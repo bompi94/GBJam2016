@@ -23,8 +23,9 @@ public class TransitionPointScript : MonoBehaviour
         if (GetComponent<Collider2D>().enabled && freccia == null)
         {
             freccia = Instantiate(Resources.Load("freccia"),transform.position,Quaternion.identity) as GameObject;
-            if (transform.position.x > GameObject.Find("Frame").transform.position.x)
-                freccia.transform.localScale = new Vector3(-.5f, .5f, transform.localScale.z); 
+            if (transform.localPosition.x > 0)
+                freccia.transform.localScale = new Vector3(-.5f, .5f, transform.localScale.z);
+            freccia.transform.parent = transform; 
         }
 
         if (GetComponent<Collider2D>() == null && freccia != null)

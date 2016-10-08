@@ -82,7 +82,7 @@ public class WurmAI : MonoBehaviour {
 	}
 
 	void FollowPlayer(){
-        if(leftMovementLimit == null || transform.position.x >= leftMovementLimit.transform.position.x)
-		    transform.position = new Vector3 (orfeo.transform.position.x, transform.position.y, transform.position.z);
+        if (leftMovementLimit == null || transform.position.x >= leftMovementLimit.transform.position.x)
+            transform.position = new Vector3(orfeo.transform.position.x, transform.position.y, transform.position.z);
 	}
 }
