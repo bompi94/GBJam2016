@@ -6,8 +6,9 @@ public class PlatformScript : MonoBehaviour
     void OnCollisionEnter2D(Collision2D coll)
     {
 
-        if (coll.gameObject.name == "orfeo" && coll.gameObject.transform.position.y > transform.position.y)
-            coll.gameObject.GetComponent<Movement>().Grounded(); 
+		if (coll.gameObject.name == "orfeo" && coll.gameObject.transform.position.y > transform.localPosition.y) 
+			coll.gameObject.GetComponent<Movement> ().Grounded (); 
+		
 
 		if (coll.gameObject.name == "warg" && coll.gameObject.transform.position.y > transform.position.y) {
 			//Debug.Log ("doggo ground");
