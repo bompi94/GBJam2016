@@ -23,7 +23,19 @@ public class WurmAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!GetComponent<EnemyScript> ().good) {
+        if (orfeo.transform.position.x > transform.position.x)
+        {
+
+
+            transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+            GetComponent<EnemyScript>().buttonShower.transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+            GetComponent<EnemyScript>().buttonShower.transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+        }
+        if (!GetComponent<EnemyScript> ().good) {
 			countdownToShaking -= Time.deltaTime;
 			countdownToDisappear -= Time.deltaTime;
 
@@ -82,7 +94,9 @@ public class WurmAI : MonoBehaviour {
 	}
 
 	void FollowPlayer(){
-        if (leftMovementLimit == null || transform.position.x >= leftMovementLimit.transform.position.x)
-            transform.position = new Vector3(orfeo.transform.position.x, transform.position.y, transform.position.z);
-	}
+        float orf = orfeo.transform.position.x; 
+        float x = Mathf.Clamp(orf,leftMovementLimit.transform.position.x,Mathf.Infinity); 
+        transform.position = new Vector3(orf, transform.position.y, transform.position.z);
+        
+    }
 }
