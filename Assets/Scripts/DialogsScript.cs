@@ -4,28 +4,39 @@ using UnityEngine.UI;
 
 public class DialogsScript : MonoBehaviour {
 
-	public string[] dialogs;//nel formato indiceCharacter:messaggio
+	string[] dialogs;//nel formato indiceCharacter:messaggio
 
 	int dialogIndex = -1;
 
 	DialogGameObject[] charactersCanvas;
 
-	bool dialogFinished=false;
+	bool dialogFinished=true;
 
 	public bool dialogsEnabled;
 
 	// Use this for initialization
 	void Start () {
 		charactersCanvas = GameObject.Find ("Dialog").GetComponentsInChildren<DialogGameObject> ();
+	}
+
+	public void StartDialogs(string[] dialogs, Sprite[] bubbles){
+		Debug.Log ("Start Dialogs");
 		if (!dialogsEnabled) {
 			dialogFinished = true;
-			foreach (DialogGameObject canvas in charactersCanvas) {
-				canvas.gameObject.SetActive (false);
-			}
 		} else {
+			dialogIndex = -1;
+			dialogFinished = false;
+			this.dialogs = dialogs;
+			int i = 0;
+			foreach (DialogGameObject canvas in charactersCanvas) {
+				canvas.GetComponentInChildren<Image> ().sprite = bubbles [i];
+				i++;
+				//canvas.gameObject.SetActive (false);
+			}
 			Time.timeScale = 0;
 			ShowNextMessage ();
 		}
+
 	}
 	
 	// Update is called once per frame
@@ -38,7 +49,7 @@ public class DialogsScript : MonoBehaviour {
 			foreach (DialogGameObject canvas in charactersCanvas) {
 				canvas.gameObject.SetActive (false);
 			}
-			Destroy (gameObject);
+			//Destroy (gameObject);
 			Time.timeScale = 1;
 		}
 	}

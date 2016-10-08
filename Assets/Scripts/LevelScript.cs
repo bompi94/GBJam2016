@@ -75,4 +75,5 @@ public class LevelScript : MonoBehaviour {
 			portal.GetComponent<BoxCollider2D> ().enabled = true;
 		}
 	}
+		
 }
