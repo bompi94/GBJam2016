@@ -18,7 +18,7 @@ public class Attacker : MonoBehaviour
     {
         FindNearestEnemy();
 
-        if (targetEnemy != null)
+		if (targetEnemy != null && Time.timeScale!=0)
         {
             if (Input.GetButtonDown("Fire1"))
             {

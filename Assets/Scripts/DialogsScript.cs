@@ -6,11 +6,11 @@ public class DialogsScript : MonoBehaviour {
 
 	string[] dialogs;//nel formato indiceCharacter:messaggio
 
-	int dialogIndex = -1;
+	public int dialogIndex = -1;
 
 	DialogGameObject[] charactersCanvas;
 
-	bool dialogFinished=true;
+	public bool dialogFinished=true;
 
 	public bool dialogsEnabled;
 
@@ -24,16 +24,14 @@ public class DialogsScript : MonoBehaviour {
 		if (!dialogsEnabled) {
 			dialogFinished = true;
 		} else {
+			Time.timeScale = 0;
 			dialogIndex = -1;
 			dialogFinished = false;
 			this.dialogs = dialogs;
-			int i = 0;
-			foreach (DialogGameObject canvas in charactersCanvas) {
-				canvas.GetComponentInChildren<Image> ().sprite = bubbles [i];
-				i++;
+			for(int i=0;i<bubbles.Length;i++){
+				charactersCanvas[i].GetComponentInChildren<Image> ().sprite = bubbles [i];
 				//canvas.gameObject.SetActive (false);
 			}
-			Time.timeScale = 0;
 			ShowNextMessage ();
 		}
 
