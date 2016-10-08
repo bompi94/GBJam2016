@@ -6,7 +6,7 @@ public class TransitionPointScript : MonoBehaviour
 
     public int goToScene;
     public bool goingBack;
-
+    GameObject freccia;
     bool playerExited = true;
     bool inside;
 
@@ -20,6 +20,16 @@ public class TransitionPointScript : MonoBehaviour
 
     void Update()
     {
+        if (GetComponent<Collider2D>().enabled && freccia == null)
+        {
+            freccia = Instantiate(Resources.Load("freccia"),transform.position,Quaternion.identity) as GameObject;
+            if (transform.position.x > GameObject.Find("Frame").transform.position.x)
+                freccia.transform.localScale = new Vector3(-.5f, transform.localScale.y, transform.localScale.z); 
+        }
+
+        if (GetComponent<Collider2D>() == null && freccia != null)
+            Destroy(freccia);
+
         if (orfeo != null && inside)
         {
             if (orfeo.GetComponent<Movement>().pickedUp && playerExited)
