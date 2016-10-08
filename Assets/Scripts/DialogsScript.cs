@@ -14,6 +14,8 @@ public class DialogsScript : MonoBehaviour {
 
 	public bool dialogsEnabled;
 
+	bool dialogdisabled = false;
+
 	// Use this for initialization
 	void Start () {
 		charactersCanvas = GameObject.Find ("Dialog").GetComponentsInChildren<DialogGameObject> ();
@@ -27,6 +29,7 @@ public class DialogsScript : MonoBehaviour {
 			Time.timeScale = 0;
 			dialogIndex = -1;
 			dialogFinished = false;
+			dialogdisabled = false;
 			this.dialogs = dialogs;
 			for(int i=0;i<bubbles.Length;i++){
 				charactersCanvas[i].GetComponentInChildren<Image> ().sprite = bubbles [i];
@@ -39,16 +42,19 @@ public class DialogsScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!dialogFinished) {
-			if (Input.GetMouseButtonDown (0)) {
-				ShowNextMessage ();
+		if (!dialogdisabled) {
+			if (!dialogFinished) {
+				if (Input.GetMouseButtonDown (0)) {
+					ShowNextMessage ();
+				}
+			} else {
+				foreach (DialogGameObject canvas in charactersCanvas) {
+					canvas.gameObject.SetActive (false);
+				}
+				//Destroy (gameObject);
+				Time.timeScale = 1;
+				dialogdisabled = true;
 			}
-		} else {
-			foreach (DialogGameObject canvas in charactersCanvas) {
-				canvas.gameObject.SetActive (false);
-			}
-			//Destroy (gameObject);
-			Time.timeScale = 1;
 		}
 	}
 
