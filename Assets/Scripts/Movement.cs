@@ -110,8 +110,9 @@ public class Movement : MonoBehaviour
             {
                 GameObject.Find("euridice").GetComponent<EurydiceScript>().JumpWithMe();
             }
-            GetComponent<AudioSource>().clip = jumpSounds[Random.Range(0,jumpSounds.Length)];
-            GetComponent<AudioSource>().Play();
+			SoundsScript.PlayOneShot("jump",jumpSounds[Random.Range(0,jumpSounds.Length)],GetComponent<AudioSource>());
+         //   GetComponent<AudioSource>().clip = jumpSounds[Random.Range(0,jumpSounds.Length)];
+         //   GetComponent<AudioSource>().Play();
         }
 
     }
