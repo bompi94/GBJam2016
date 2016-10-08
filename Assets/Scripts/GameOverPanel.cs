@@ -23,12 +23,14 @@ public class GameOverPanel : MonoBehaviour {
 
     IEnumerator WaitAndDeactivate()
     {
+        print("alfa"); 
         yield return new WaitForSeconds(3);
         Deactivate(); 
     }
 
     public void Deactivate()
     {
+        print("beta"); 
         GetComponent<Image>().enabled = false;
         GetComponentInChildren<Text>().enabled = false;
     }

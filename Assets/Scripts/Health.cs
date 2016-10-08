@@ -82,4 +82,10 @@ public class Health : MonoBehaviour {
 			SceneManager.RespawnScene ();
 		}
     }
+
+    public void FullHealth()
+    {
+        health = maxHealth;
+        healthSlider.value = health;
+    }
 }
