@@ -59,6 +59,9 @@ public class SceneManager : MonoBehaviour {
 				Debug.Log ("Transition Completed");
                 Destroy(oldScene);
 				changing=false;
+				DialogsLevel tmp = currentsceneobj.GetComponent<DialogsLevel>();
+				if(tmp!=null)
+					tmp.ShowDialogs();
 			}));
 		}
 	}
