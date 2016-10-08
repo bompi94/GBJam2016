@@ -22,7 +22,6 @@ public class WargAI : MonoBehaviour {
 	public bool euridiceHavePriority=false;
 	public float jumpforce;
 	public bool grounded = true;
-	public GameObject palo;
 
 	public float jumpCooldown = 0;
 	void Start()
@@ -236,14 +235,12 @@ public class WargAI : MonoBehaviour {
 		{
 			grounded = false;
 			GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpforce), ForceMode2D.Impulse);
-			palo.GetComponent<Collider2D>().enabled = true;
 		}
 
 	}
 
 	public void Grounded()
 	{
-		palo.GetComponent<Collider2D>().enabled = false;
 		grounded = true;
 	}
 }

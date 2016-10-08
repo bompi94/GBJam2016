@@ -10,6 +10,7 @@ public class WurmAI : MonoBehaviour {
 	public bool disappearing = false;
 	GameObject orfeo;
 	public BoxCollider2D collider;
+    public GameObject leftMovementLimit;
 	// Use this for initialization
 	void Start () {
 		countdownToShaking=Random.Range (4f, 9f);
@@ -81,6 +82,7 @@ public class WurmAI : MonoBehaviour {
 	}
 
 	void FollowPlayer(){
-		transform.position = new Vector3 (orfeo.transform.position.x, transform.position.y, transform.position.z);
+        if(leftMovementLimit == null || transform.position.x >= leftMovementLimit.transform.position.x)
+		    transform.position = new Vector3 (orfeo.transform.position.x, transform.position.y, transform.position.z);
 	}
 }
