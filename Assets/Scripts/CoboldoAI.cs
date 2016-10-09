@@ -23,10 +23,12 @@ public class CoboldoAI : MonoBehaviour
     void Start()
     {
         orfeo = GameObject.Find("orfeo");
+		GameObject euridice = GameObject.Find ("euridice");
         startingPosition = transform.position;
         anim = GetComponent<Animator>();
 	//	enemyRigidbody = GetComponent<Rigidbody2D> ();
 		Physics2D.IgnoreCollision (GetComponent<PolygonCollider2D> (), orfeo.GetComponent<BoxCollider2D> ());
+		Physics2D.IgnoreCollision (GetComponent<PolygonCollider2D> (), euridice.GetComponent<BoxCollider2D> ());
         speed = .5f;
     }
 
