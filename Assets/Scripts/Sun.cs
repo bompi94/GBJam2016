@@ -17,16 +17,16 @@ public class Sun : MonoBehaviour
         s.GetComponent<Image>().enabled = true;
         Destroy(GameObject.Find("orfeo"));
         Destroy(GameObject.Find("euridice"));
-        GameObject.Find("GamePanel").SetActive(false); 
+        GameObject.Find("GamePanel").SetActive(false);       
     }
 
     // Update is called once per frame
     void Update()
     {
+        GameObject.Find("GameState").GetComponent<AudioSource>().volume -= speed * Time.deltaTime;
         Color sun = s.GetComponent<Image>().color;
-        sun.a -= (speed * Time.deltaTime);
+        sun.a -= ((speed/1.5f) * Time.deltaTime);
         s.GetComponent<Image>().color = sun;
-        
     }
 
 }
