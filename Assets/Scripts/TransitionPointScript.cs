@@ -9,10 +9,11 @@ public class TransitionPointScript : MonoBehaviour
     GameObject freccia;
     bool playerExited = true;
     bool inside;
-    public bool shouldShowFrecccia = true; 
+    public bool shouldShowFrecccia = true;
+    public bool shouldPickUp = true;
 
     LevelScript level;
-    GameObject orfeo; 
+    GameObject orfeo;
 
     void Start()
     {
@@ -37,15 +38,20 @@ public class TransitionPointScript : MonoBehaviour
 
         if (orfeo != null && inside)
         {
-            if (orfeo.GetComponent<Movement>().pickedUp && playerExited)
+            if (shouldPickUp)
             {
-                //scnManager.SceneChange (goToScene,goingBack);
+                if (orfeo.GetComponent<Movement>().pickedUp && playerExited)
+                {
+                    //scnManager.SceneChange (goToScene,goingBack);
+                    SceneManager.ChangeScene(goToScene, goingBack);
+                }
+                if (!orfeo.GetComponent<Movement>().pickedUp && playerExited)
+                {
+                    Debug.Log("Prendi Euridice coglione!");
+                }
+            }
+            else
                 SceneManager.ChangeScene(goToScene, goingBack);
-            }
-            if (!orfeo.GetComponent<Movement>().pickedUp && playerExited)
-            {
-                Debug.Log("Prendi Euridice coglione!");
-            }
         }
     }
 
@@ -54,9 +60,9 @@ public class TransitionPointScript : MonoBehaviour
     {
         if (coll.name == "orfeo")
         {
-            orfeo = coll.gameObject; 
+            orfeo = coll.gameObject;
             inside = true;
-           
+
         }
     }
 
