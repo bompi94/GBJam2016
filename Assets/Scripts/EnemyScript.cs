@@ -118,6 +118,8 @@ public class EnemyScript : MonoBehaviour {
 
 	void PlaySound(){
 		GameObject.Find ("SoundsManager").GetComponent<AudioSource> ().clip = getGoodSounds [Random.Range (0, getGoodSounds.Length-1)];
+		GameObject.Find ("SoundsManager").GetComponent<AudioSource> ().volume = 0.8f;
 		GameObject.Find ("SoundsManager").GetComponent<AudioSource> ().Play ();
+		GameObject.Find ("SoundsManager").GetComponent<AudioSource> ().volume = 1f;
 	}
 }

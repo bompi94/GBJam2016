@@ -44,7 +44,11 @@ public class SoundsScript : MonoBehaviour {
 			min=(float)typeof(SoundsScript).GetField (name + "PitchMin").GetValue (instance);
 		if(typeof(SoundsScript).GetField (name + "PitchMax")!=null)
 			max=(float)typeof(SoundsScript).GetField (name + "PitchMax").GetValue (instance);
-		
+		if (name == "eyeShot") {
+			source.volume = 0.7f;
+		} else {
+			source.volume = 1f;
+		}
 		Debug.Log ("playing sound " + name + " with pitch range " + min + "-" + max);
 		source.clip = clip;
 		source.pitch = Random.Range (min, max);
