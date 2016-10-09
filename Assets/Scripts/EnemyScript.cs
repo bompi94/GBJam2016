@@ -17,11 +17,16 @@ public class EnemyScript : MonoBehaviour {
 
 	void Start () {
 		currentLevel = gameObject.GetComponentInParent<LevelScript> ();
+        if (name.StartsWith("Wurm"))
+            numberOfButtons = 18;
+        if (name.StartsWith("eye"))
+            numberOfButtons = 6;
         sequence = new int[numberOfButtons];
         for(int i = 0; i<sequence.Length; i++)
         {
             sequence[i] = Random.Range(0, 2); 
         }
+        
 	}
 
 	void Update () {

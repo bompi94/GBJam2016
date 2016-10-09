@@ -11,7 +11,7 @@ public class EyeAI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        orfeo = GameObject.Find("orfeo"); 
+        orfeo = GameObject.Find("orfeo");
 	}
 	
 	// Update is called once per frame

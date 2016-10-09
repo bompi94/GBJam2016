@@ -50,7 +50,13 @@ public class InsettoAssassinoAI : MonoBehaviour
             else
             {
                 if (shouldMove)
-                    startingPos.transform.position = new Vector3(orfeo.transform.position.x, startingPos.transform.position.y, 0);
+                {
+                    float range = 2;
+                    float x = Mathf.Clamp(orfeo.transform.position.x, GameObject.Find("Frame").transform.position.x - range,
+                        GameObject.Find("Frame").transform.position.x + range);
+                    startingPos.transform.position = new Vector3(x, startingPos.transform.position.y, 0);
+                }
+                    
             }
         }
     }

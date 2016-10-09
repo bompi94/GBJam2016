@@ -19,7 +19,7 @@ public class WurmAI : MonoBehaviour {
 		collider.enabled = false;
 		GetComponent<EnemyScript> ().aimable = false;
 		GetComponent<EnemyScript> ().HideSequence ();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
