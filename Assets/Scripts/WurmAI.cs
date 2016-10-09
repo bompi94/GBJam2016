@@ -91,9 +91,10 @@ public class WurmAI : MonoBehaviour {
 	}
 
 	void FollowPlayer(){
-        float orf = orfeo.transform.position.x; 
-        float x = Mathf.Clamp(orf,leftMovementLimit.transform.position.x,Mathf.Infinity); 
-        transform.position = new Vector3(orf, transform.position.y, transform.position.z);
+        float range = 2;
+        float x = Mathf.Clamp(orfeo.transform.position.x, GameObject.Find("Frame").transform.position.x - range,
+            GameObject.Find("Frame").transform.position.x + range);
+        transform.position = new Vector3(x, transform.position.y, transform.position.z);
         
     }
 }
