@@ -9,6 +9,26 @@ public class SoundsScript : MonoBehaviour {
 
 	public float jumpPitchMin=1;
 	public float jumpPitchMax=1;
+	public float eyeShotPitchMax = 1;
+	public float eysShotPitchMin = 1;
+	public float pickUpPitchMax = 1;
+	public float pickUpPitchMin = 1;
+	public float lifeLostPitchMax = 1;
+	public float lifeLostPitchMin = 1;
+	public float hitHurtPitchMax = 1;
+	public float hitHurtPitchMin = 1;
+	public float enterInDoorPitchMax = 1;
+	public float enterInDoorPitchMin = 1;
+	public float gameoverPitchMax = 1;
+	public float gameoverPitchMin = 1;
+
+
+	public AudioClip[] getGoodSounds;
+	public AudioClip eyeshotSounds;
+	public AudioClip[] ragnoneAppearSounds;
+	public AudioClip[] wurmAppearSounds;
+	public AudioClip pickUpSound;
+	public AudioClip enterInDoorSound;
 
 
 	// Use this for initialization

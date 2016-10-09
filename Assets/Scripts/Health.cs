@@ -12,6 +12,9 @@ public class Health : MonoBehaviour {
     public int lives = 30;
     int l;
 
+	public AudioClip hitHurtSound;
+	public AudioClip lifeLostSound;
+	public AudioClip gameoverSound;
 	// Use this for initialization
 	void Start () {
         Init();
@@ -47,6 +50,7 @@ public class Health : MonoBehaviour {
             {
                 health -= amount;
                 GameObject.Find("orfeo").SendMessage("ShowHit");
+				SoundsScript.PlayOneShot ("hitHurt", hitHurtSound, GetComponent<AudioSource> ());
             }
         }
 
@@ -56,6 +60,7 @@ public class Health : MonoBehaviour {
             {
                 health -= amount;
                 GameObject.Find("euridice").SendMessage("ShowHit");
+				SoundsScript.PlayOneShot ("hitHurt", hitHurtSound, GetComponent<AudioSource> ());
             }
         }
 
@@ -75,10 +80,12 @@ public class Health : MonoBehaviour {
         Debug.Log("sei morto");
         l--;
 		if (l <= 0) {
+			SoundsScript.PlayOneShot ("gameover", gameoverSound, GetComponent<AudioSource> ());
 			SceneManager.GoToLastCheckpoint ();
             l = lives; 
 
 		} else {
+			SoundsScript.PlayOneShot ("lifeLost", lifeLostSound, GetComponent<AudioSource> ());
 			SceneManager.RespawnScene ();
 		}
     }
