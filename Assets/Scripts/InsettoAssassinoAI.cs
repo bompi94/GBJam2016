@@ -19,9 +19,13 @@ public class InsettoAssassinoAI : MonoBehaviour
     public GameObject coda;
     public bool shouldMove = true;
 
+
+	public AudioClip[] ragnoneAppearSounds;
+	bool soundPlayed=false;
     // Use this for initialization
     void Start()
     {
+		ragnoneAppearSounds = GameObject.Find ("SoundsManager").GetComponent<SoundsScript> ().ragnoneAppearSounds;
         orfeo = GameObject.Find("orfeo");
         lr = GetComponent<LineRenderer>();
 
@@ -38,6 +42,8 @@ public class InsettoAssassinoAI : MonoBehaviour
             //startingPos.transform.position = new Vector3(orfeo.transform.position.x,startingPos.transform.position.y,0);
             if (timer >= startToFallTime && !arrived)
             {
+				if (!soundPlayed)
+					PlaySound ();
                 goingDown = true;
                 if (goingDown)
                     GoDown();
@@ -89,6 +95,7 @@ public class InsettoAssassinoAI : MonoBehaviour
             timer = 0;
             goingDown = false;
             arrived = false;
+			soundPlayed = false;
         }
     }
 
@@ -104,4 +111,10 @@ public class InsettoAssassinoAI : MonoBehaviour
                 GetComponent<EnemyScript>().DealDamage(2, "euridice");
         }
     }
+
+	void PlaySound(){
+		GameObject.Find ("SoundsManager").GetComponent<AudioSource> ().clip = ragnoneAppearSounds [Random.Range (0, ragnoneAppearSounds.Length-1)];
+		GameObject.Find ("SoundsManager").GetComponent<AudioSource> ().Play ();
+		soundPlayed = true;
+	}
 }

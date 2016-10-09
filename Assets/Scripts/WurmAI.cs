@@ -11,8 +11,12 @@ public class WurmAI : MonoBehaviour {
 	GameObject orfeo;
 	public BoxCollider2D collider;
     public GameObject leftMovementLimit;
+
+
+	public AudioClip[] wurmAppearSounds;
 	// Use this for initialization
 	void Start () {
+		wurmAppearSounds = GameObject.Find ("SoundsManager").GetComponent<SoundsScript> ().wurmAppearSounds;
 		countdownToShaking=Random.Range (4f, 9f);
 		orfeo = GameObject.Find("orfeo");
 		collider=GetComponent<BoxCollider2D> ();
@@ -60,6 +64,7 @@ public class WurmAI : MonoBehaviour {
 		appeared = true;
 		GetComponent<WurmScript> ().Appear ();
 		countdownToDisappear=Random.Range (3.5f, 5.5f);
+		PlaySound ();
 		Invoke ("FinishAppearing", 0.5f);
 	}
 
@@ -74,7 +79,6 @@ public class WurmAI : MonoBehaviour {
 		appeared = false;
 		appearing = false;
 		disappearing = false;
-
 	}
 
 	void OnTriggerEnter2D(Collider2D coll)
@@ -97,4 +101,9 @@ public class WurmAI : MonoBehaviour {
         transform.position = new Vector3(x, transform.position.y, transform.position.z);
         
     }
+
+	void PlaySound(){
+		GameObject.Find ("SoundsManager").GetComponent<AudioSource> ().clip = wurmAppearSounds [Random.Range (0, wurmAppearSounds.Length-1)];
+		GameObject.Find ("SoundsManager").GetComponent<AudioSource> ().Play ();
+	}
 }

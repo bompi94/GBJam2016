@@ -20,22 +20,33 @@ public class GameState : MonoBehaviour {
 
 	public int indexLastCheckpointVisited = 0;
 
+	public bool onGameScene=false;
+
 	void Start(){
 		GameObject.DontDestroyOnLoad (gameObject);
+
 	}
 
 	void Update(){
-		if (Input.GetKeyDown (KeyCode.Escape) || Input.GetButtonDown("pause")) {
-			if (inPause) {//sono in pausa
-				pausePanel.SetActive (false);
-				inPause = false;
-				Time.timeScale = 1;
-			} else {//non sono in pausa
-				pausePanel.SetActive (true);
-				inPause = true;
-				Time.timeScale = 0;
+		if (onGameScene) {
+			if (Input.GetKeyDown (KeyCode.Escape) || Input.GetButtonDown ("pause")) {
+				if (inPause) {//sono in pausa
+					pausePanel.SetActive (false);
+					inPause = false;
+					Time.timeScale = 1;
+				} else {//non sono in pausa
+					pausePanel.SetActive (true);
+					inPause = true;
+					Time.timeScale = 0;
+				}
 			}
 		}
+	}
+
+	public void onChangeScene(){
+		onGameScene = true;
+		pausePanel = GameObject.Find ("PausePanel");
+		pausePanel.SetActive (false);
 	}
 
 }

@@ -15,7 +15,11 @@ public class EnemyScript : MonoBehaviour {
 
 	public LevelScript currentLevel;
 
+	public AudioClip[] getGoodSounds;
+
 	void Start () {
+		getGoodSounds = GameObject.Find ("SoundsManager").GetComponent<SoundsScript> ().getGoodSounds;
+
 		currentLevel = gameObject.GetComponentInParent<LevelScript> ();
         if (name.StartsWith("Wurm"))
             numberOfButtons = 18;
@@ -92,6 +96,7 @@ public class EnemyScript : MonoBehaviour {
     public void GetGood()
     {
         HideSequence();
+		PlaySound ();
         heart.SetActive(true);
         good = true;
         if(currentLevel!=null)
@@ -110,4 +115,9 @@ public class EnemyScript : MonoBehaviour {
         GameObject.Find("Health").GetComponent<Health>().TakeDamage(damages*multiplier,characterHit);
         
     }
+
+	void PlaySound(){
+		GameObject.Find ("SoundsManager").GetComponent<AudioSource> ().clip = getGoodSounds [Random.Range (0, getGoodSounds.Length-1)];
+		GameObject.Find ("SoundsManager").GetComponent<AudioSource> ().Play ();
+	}
 }

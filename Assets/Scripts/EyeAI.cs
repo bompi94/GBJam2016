@@ -9,9 +9,12 @@ public class EyeAI : MonoBehaviour {
     float timer;
     public GameObject projectile; 
 
+	public AudioClip eyeShotSound;
 	// Use this for initialization
 	void Start () {
         orfeo = GameObject.Find("orfeo");
+		eyeShotSound = GameObject.Find ("SoundsManager").GetComponent<SoundsScript> ().eyeshotSounds;
+
 	}
 	
 	// Update is called once per frame
@@ -31,5 +34,6 @@ public class EyeAI : MonoBehaviour {
     public void Shoot()
     {
         Instantiate(projectile,transform.position,Quaternion.identity);
+		SoundsScript.PlayOneShot("eyeShot",eyeShotSound,GameObject.Find ("SoundsManager").GetComponent<AudioSource>());
     }
 }

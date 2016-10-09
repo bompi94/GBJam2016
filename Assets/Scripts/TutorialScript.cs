@@ -10,12 +10,17 @@ public class TutorialScript : MonoBehaviour {
 
 	void Start(){
 		game = GameObject.Find ("GameState").GetComponent<GameState> ();
+
 		if (!game.tutorialsState.ContainsKey (tutorialIndex)) {
 			game.tutorialsState.Add (tutorialIndex, false);
+			Debug.Log ("tutorial non visto");
+		} else {
+			Debug.Log ("tutorial gia visto");
 		}
 	}
 
 	void OnTriggerEnter2D(Collider2D coll){
+		Debug.Log (game.tutorialsState [tutorialIndex]);
 		if (coll.name == "orfeo" && !used && game!=null && game.tutorialsState.ContainsKey(tutorialIndex) && !game.tutorialsState[tutorialIndex]) {
 			used = true;
 			game.tutorialsState [tutorialIndex] = true;
@@ -24,6 +29,7 @@ public class TutorialScript : MonoBehaviour {
 	}
 
 	void OnTriggerStay2D(Collider2D coll){
+		Debug.Log (game.tutorialsState [tutorialIndex]);
 		if (coll.name == "orfeo" && !used && game.tutorialsState.ContainsKey(tutorialIndex) && !game.tutorialsState[tutorialIndex]) {
 			used = true;
 			game.tutorialsState [tutorialIndex] = true;
