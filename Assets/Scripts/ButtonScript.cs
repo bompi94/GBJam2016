@@ -19,7 +19,7 @@ public class ButtonScript : MonoBehaviour, ISelectHandler, IPointerEnterHandler,
     public void OnSelect(BaseEventData eventData)
     {
         print("selected" + gameObject.name);
-        GetComponentInChildren<Text>().color = Color.grey;
+		GetComponentInChildren<Text>().color = Color.HSVToRGB(0, 84, 81);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -33,4 +33,9 @@ public class ButtonScript : MonoBehaviour, ISelectHandler, IPointerEnterHandler,
         print("selected" + gameObject.name);
         GetComponentInChildren<Text>().color = Color.white; 
     }
+
+	public void OnDeselect(){
+		print("deselected" + gameObject.name);
+		GetComponentInChildren<Text>().color = Color.white; 
+	}
 }

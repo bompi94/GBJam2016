@@ -44,7 +44,7 @@ public class DialogsScript : MonoBehaviour {
 	void Update () {
 		if (!dialogdisabled) {
 			if (!dialogFinished) {
-				if (Input.GetMouseButtonDown (0)) {
+				if (Input.GetMouseButtonDown (0) || Input.GetButtonDown("Fire1")) {
 					ShowNextMessage ();
 				}
 			} else {
