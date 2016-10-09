@@ -19,8 +19,8 @@ public class CaronteSoundTracks : MonoBehaviour {
         {
 		   Debug.Log ("volume 0 : " + soundTracks [0].volume);
 		   Debug.Log ("volume 1: " + soundTracks [1].volume);
-           soundTracks[0].volume = Mathf.Lerp(soundTracks[0].volume, 0, Time.fixedDeltaTime * 1.5f);
-			soundTracks[1].volume = Mathf.Lerp(soundTracks[1].volume, 1, Time.fixedDeltaTime * 1.5f);
+           soundTracks[0].volume = Mathf.Lerp(soundTracks[0].volume, 0, Time.fixedDeltaTime * 1f);
+			soundTracks[1].volume = Mathf.Lerp(soundTracks[1].volume, 1, Time.fixedDeltaTime * 1f);
 			yield return new WaitForEndOfFrame ();
         }
         soundTracks[1].volume = 1f;
