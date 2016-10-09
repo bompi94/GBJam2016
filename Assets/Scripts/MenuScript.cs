@@ -8,7 +8,13 @@ public class MenuScript : MonoBehaviour {
 	}
 
 	public void OnCreditsPressed(){
-	}
+        UnityEngine.SceneManagement.SceneManager.LoadScene("creditsScene");
+    }
+
+    public void OnBackPressed()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+    }
 
 	public void OnExitPressed(){
 		Application.Quit ();

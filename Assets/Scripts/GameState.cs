@@ -22,6 +22,16 @@ public class GameState : MonoBehaviour {
 
 	public bool onGameScene=false;
 
+    static GameObject instance; 
+
+    void Awake()
+    {
+        if (instance == null)
+            instance = gameObject;
+        else
+            Destroy(gameObject);
+    }
+
 	void Start(){
 		GameObject.DontDestroyOnLoad (gameObject);
 
