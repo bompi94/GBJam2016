@@ -37,14 +37,14 @@ public class Attacker : MonoBehaviour
 
     public void FindNearestEnemy()
     {
-        if (targetEnemy == null || targetEnemy.GetComponent<EnemyScript>().good)
+		if (targetEnemy == null || targetEnemy.GetComponent<EnemyScript>().good || !targetEnemy.GetComponent<EnemyScript>().aimable)
         {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             float minDist = Mathf.Infinity;
             foreach (GameObject enemy in enemies)
             {
                 float tempdist = Vector3.Distance(transform.position, enemy.transform.position);
-                if (tempdist < range && tempdist<minDist )
+				if (tempdist < range && tempdist<minDist && enemy.GetComponent<EnemyScript>().aimable)
                 {
                     minDist = tempdist;
                     targetEnemy = enemy;

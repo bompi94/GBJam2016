@@ -25,8 +25,6 @@ public class WurmAI : MonoBehaviour {
 	void Update () {
         if (orfeo.transform.position.x > transform.position.x)
         {
-
-
             transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
             GetComponent<EnemyScript>().buttonShower.transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
         }
@@ -68,7 +66,6 @@ public class WurmAI : MonoBehaviour {
 	void FinishAppearing(){
 		collider.enabled = true;
 		GetComponent<EnemyScript> ().aimable = true;
-		GetComponent<EnemyScript> ().ShowSequence ();
 	}
 
 	void HideWurm(){
