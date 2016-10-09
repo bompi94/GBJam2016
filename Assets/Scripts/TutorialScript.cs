@@ -20,7 +20,6 @@ public class TutorialScript : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D coll){
-		Debug.Log (game.tutorialsState [tutorialIndex]);
 		if (coll.name == "orfeo" && !used && game!=null && game.tutorialsState.ContainsKey(tutorialIndex) && !game.tutorialsState[tutorialIndex]) {
 			used = true;
 			game.tutorialsState [tutorialIndex] = true;
@@ -29,7 +28,6 @@ public class TutorialScript : MonoBehaviour {
 	}
 
 	void OnTriggerStay2D(Collider2D coll){
-		Debug.Log (game.tutorialsState [tutorialIndex]);
 		if (coll.name == "orfeo" && !used && game.tutorialsState.ContainsKey(tutorialIndex) && !game.tutorialsState[tutorialIndex]) {
 			used = true;
 			game.tutorialsState [tutorialIndex] = true;

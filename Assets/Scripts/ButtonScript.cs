@@ -22,14 +22,13 @@ public class ButtonScript : MonoBehaviour, ISelectHandler, IPointerEnterHandler,
     {
         print("selected" + gameObject.name);
 		GetComponentInChildren<Text>().color = Color.HSVToRGB(0, 84, 81);
-		PlaySound (UISelect);
+		PlaySound (UIMouseOver);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         print("selected" + gameObject.name);
         GetComponentInChildren<Text>().color = Color.HSVToRGB(0, 84, 81);
-		PlaySound (UIMouseOver);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -37,6 +36,11 @@ public class ButtonScript : MonoBehaviour, ISelectHandler, IPointerEnterHandler,
         print("selected" + gameObject.name);
         GetComponentInChildren<Text>().color = Color.white; 
     }
+
+	public void OnPointerClick(){
+		print("clicked" + gameObject.name);
+		PlaySound (UISelect);
+	}
 
 	public void OnDeselect(){
 		print("deselected" + gameObject.name);
