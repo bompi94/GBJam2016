@@ -22,6 +22,8 @@ public class SceneManager : MonoBehaviour {
 	public GameObject currentsceneobj;
 
 	GameState gameState;
+
+	public Vector3 deltaEntryPlug=new Vector3(0,0.35f,0);
 	// Use this for initialization
 	void Start () {
 		InstantiateAndDestroy (currentScene);
@@ -42,9 +44,9 @@ public class SceneManager : MonoBehaviour {
 			point.DeactivateUntilExit ();
 			entrypoint = point.transform;
 		}
-		orfeo.transform.position = entrypoint.position;
-        if(currentScene!=36)
-		    euridice.transform.position = entrypoint.position + delta;
+		orfeo.transform.position = entrypoint.position + deltaEntryPlug;
+		if (currentScene != 36)
+			euridice.transform.position = entrypoint.position + delta + deltaEntryPlug;
         else
             euridice.transform.position = entrypoint.position+new Vector3(-0.5f,0,0);
     }
@@ -58,11 +60,13 @@ public class SceneManager : MonoBehaviour {
             delta = euridice.transform.position - orfeo.transform.position;
                 
 			RepositionateCharacters (goingBack);
+			Time.timeScale = 0;
 			StartCoroutine (CameraSliding (currentScene, () => {
 				Debug.Log ("Transition Completed");
                 Destroy(oldScene);
 				changing=false;
 				DialogsLevel tmp = currentsceneobj.GetComponent<DialogsLevel>();
+				Time.timeScale = 1;
 				if(tmp!=null)
 					tmp.ShowDialogs();
 			}));
@@ -131,7 +135,7 @@ public class SceneManager : MonoBehaviour {
 	IEnumerator CameraSliding(int toSceneindex, Action callback){
 		Vector3 destination = GetCameraCenter (toSceneindex);
 		while(Vector3.Distance(Camera.main.transform.position,destination)>0.1f){
-			Camera.main.transform.position = Vector3.MoveTowards (Camera.main.transform.position, destination, Time.deltaTime * speed);
+			Camera.main.transform.position = Vector3.MoveTowards (Camera.main.transform.position, destination, Time.fixedDeltaTime * speed);
 			yield return new WaitForEndOfFrame ();
 		}
 		Camera.main.transform.position = destination;
