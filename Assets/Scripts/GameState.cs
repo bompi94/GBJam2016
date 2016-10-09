@@ -20,6 +20,10 @@ public class GameState : MonoBehaviour {
 
 	public int indexLastCheckpointVisited = 0;
 
+	void Start(){
+		GameObject.DontDestroyOnLoad (gameObject);
+	}
+
 	void Update(){
 		if (Input.GetKeyDown (KeyCode.Escape) || Input.GetButtonDown("pause")) {
 			if (inPause) {//sono in pausa
