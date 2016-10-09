@@ -10,7 +10,7 @@ public class SoundsScript : MonoBehaviour {
 	public float jumpPitchMin=1;
 	public float jumpPitchMax=1;
 	public float eyeShotPitchMax = 1;
-	public float eysShotPitchMin = 1;
+	public float eyeShotPitchMin = 1;
 	public float pickUpPitchMax = 1;
 	public float pickUpPitchMin = 1;
 	public float lifeLostPitchMax = 1;
