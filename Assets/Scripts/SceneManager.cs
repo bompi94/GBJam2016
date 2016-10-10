@@ -45,6 +45,8 @@ public class SceneManager : MonoBehaviour {
 			entrypoint = point.transform;
 		}
 		orfeo.transform.position = entrypoint.position + deltaEntryPlug;
+		orfeo.GetComponent<Movement> ().canGoLeft = true;
+		orfeo.GetComponent<Movement> ().canGoRight = true;
 		if (currentScene != 36)
 			euridice.transform.position = entrypoint.position + delta + deltaEntryPlug;
         else
