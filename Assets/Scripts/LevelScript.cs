@@ -73,5 +73,33 @@ public class LevelScript : MonoBehaviour {
 			portal.GetComponent<BoxCollider2D> ().enabled = true;
 		}
 	}
+
+    public void OnFinishedLoad()
+    {
+        StartCoroutine(CheckCharacterPositions());
+    }
+
+    IEnumerator CheckCharacterPositions()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.1f);
+            GameObject o = GameObject.Find("orfeo");
+            if (o != null)
+            {
+                Vector3 posOrfeo = o.transform.position;
+                GameObject frame = transform.FindChild("Frame").gameObject;
+                if (Math.Abs(posOrfeo.x - frame.transform.position.x) >= 2.6f ||
+                   Math.Abs(posOrfeo.y - frame.transform.position.y) >= 5f)
+
+                {
+                    print("Bananaaaaaa");
+                    GameObject.Find("SceneManager").GetComponent<SceneManager>().RepositionateCharacters(false);
+                }
+            }
+            else
+                break;       
+        }
+    }
 		
 }

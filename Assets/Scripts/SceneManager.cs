@@ -35,7 +35,7 @@ public class SceneManager : MonoBehaviour {
 
 	}
 
-	void RepositionateCharacters(bool goingBack){
+	public void RepositionateCharacters(bool goingBack){
 		Transform entrypoint;
 		if (!goingBack) {
 			entrypoint = scenes [currentScene].GetComponentInChildren<EntryScript> ().transform;
@@ -45,6 +45,7 @@ public class SceneManager : MonoBehaviour {
 			entrypoint = point.transform;
 		}
 		orfeo.transform.position = entrypoint.position + deltaEntryPlug;
+        orfeo.GetComponent<Rigidbody2D>().velocity = Vector3.zero; 
 		orfeo.GetComponent<Movement> ().canGoLeft = true;
 		orfeo.GetComponent<Movement> ().canGoRight = true;
 		if (currentScene != 36)
@@ -69,6 +70,7 @@ public class SceneManager : MonoBehaviour {
 				changing=false;
 				DialogsLevel tmp = currentsceneobj.GetComponent<DialogsLevel>();
 				Time.timeScale = 1;
+                currentsceneobj.GetComponent<LevelScript>().OnFinishedLoad();
 				if(tmp!=null)
 					tmp.ShowDialogs();
 			}));
